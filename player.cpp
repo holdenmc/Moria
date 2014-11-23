@@ -5,6 +5,8 @@ CIS 190 Final Project
 player.cpp - implementations for player.h
  */
 
+#include <iomanip>
+#include <iostream>
 #include <string>
 #include "player.h"
 
@@ -14,30 +16,31 @@ using namespace std;
 Player::Player() {
   name = "John Snow";
   gender = 'm';
-  str = 5;
-  intel = 5;
-  wisd = 5;
-  dext = 5;
-  cons = 5;
-  charisma = 5;
-  age = 20;
-  height = 72;
-  weight = 155;
+  str = DEF_STAT;
+  intel = DEF_STAT;
+  wisd = DEF_STAT;
+  dext = DEF_STAT;
+  cons = DEF_STAT;
+  charisma = DEF_STAT;
+  age = DEF_AGE;
+  height = DEF_HEIGHT_M;
+  weight = DEF_WEIGHT_M;
   
   level = 1;
   exp = 0;
-  mana = 50;
-  gold = 200;
+  mana = DEF_MANA;
+  gold = DEF_GOLD;
 
 }
 
 Player::Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons, 
         int i_charisma, int i_age, string i_name, char i_gender) {
   name = i_name;
+
   if (gender == MALE || gender == FEMALE) {
     gender = i_gender;
   } else {
-    //cout << "CHOSE AN INVALID GENDER";
+    cout << "CHOSE AN INVALID GENDER";
     //Goes to default gender;
     gender = FEMALE;
   }
@@ -128,6 +131,7 @@ void Player::changeGold(int moneyChange) {
 }
 
 void Player::LevelUp() {
+  //THIS NEEDS TO BE DONE
   //Calls some sort of menu where the player hits inputs to choose what stats
   //to upgrade
 }

@@ -13,6 +13,14 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define MALE 'm'
 #define FEMALE 'f'
 #define LEVELEXP 100
+#define DEF_STAT 8
+#define DEF_AGE 20
+#define DEF_HEIGHT_M 70
+#define DEF_HEIGHT_F 64
+#define DEF_WEIGHT_M 180
+#define DEF_WEIGHT_F 135
+#define DEF_GOLD 200
+#define DEF_MANA 50
 
 #include <string>
 
