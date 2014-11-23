@@ -34,7 +34,8 @@ Player::Player() {
 }
 
 Player::Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons, 
-        int i_charisma, int i_age, string i_name, char i_gender) {
+        int i_charisma, int i_age, int i_height, int i_weight,
+        string i_name, char i_gender) {
   name = i_name;
 
   if (gender == MALE || gender == FEMALE) {
@@ -45,9 +46,81 @@ Player::Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons,
     gender = FEMALE;
   }
   
+  if(i_str <= 20 && i_str > 0) {
+    str = i_str;
+  } else {
+    cout << "CHOSE AN INVALID STRENGTH";
+    //Goes to default
+    str = DEF_STAT;
+  }
 
+  if(i_intel <= 20 && i_intel > 0) {
+    intel = i_intel;
+  } else {
+    cout << "CHOSE AN INVALID INTELLIGENCE";
+    //Goes to default
+    intel = DEF_STAT;
+  }
 
+  if(i_wisd <= 20 && i_wisd > 0) {
+    wisd = i_wisd;
+  } else {
+    cout << "CHOSE AN INVALID WISDOM";
+    //Goes to default
+    wisd = DEF_STAT;
+  }
 
+  if(i_dext <= 20 && i_dext > 0) {
+    dext = i_dext;
+  } else {
+    cout << "CHOSE AN INVALID DEXTERITY";
+    //Goes to default
+    dext = DEF_STAT;
+  }
+
+  if(i_cons <= 20 && i_cons > 0) {
+    cons = i_cons;
+  } else {
+    cout << "CHOSE AN INVALID CONSTITUTION";
+    //Goes to default
+    cons = DEF_STAT;
+  }
+
+  if(i_charisma <= 20 && i_charisma > 0) {
+    charisma = i_charisma;
+  } else {
+    cout << "CHOSE AN INVALID Charisma";
+    //Goes to default
+    charisma = DEF_STAT;
+  }
+
+  if(i_age <= 99 && i_age > 0) {
+    age = i_age;
+  } else {
+    cout << "CHOSE AN INVALID AGE";
+    //Goes to default
+    age = DEF_AGE;
+  }
+
+  if(i_weight <= 300 && i_weight >= 80) {
+    weight = i_weight;
+  } else {
+    if (gender == MALE) {
+      weight = DEF_WEIGHT_M;
+    } else {
+      weight = DEF_WEIGHT_F;
+    }
+  }
+
+  if(i_height <= 96 && i_height >= 36) {
+    height = i_height;
+  } else {
+    if (gender == MALE) {
+      height = DEF_HEIGHT_M;
+    } else {
+      height = DEF_HEIGHT_F;
+    }
+  }
 
 }
 

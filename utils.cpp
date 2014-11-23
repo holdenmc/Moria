@@ -13,7 +13,7 @@ utils.h - implementation for utils.h
 using namespace std;
 
 void MakePlayer(Player* thePlayer) {
-
+  
 }
 
 void DrawGame(Town* theMap, Player* thePlayer) {

@@ -30,7 +30,8 @@ class Player {
   public:
     Player();
     Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons, 
-        int i_charisma, int i_age, string i_name, char i_gender);
+        int i_charisma, int i_age, int i_height, int i_weight,
+        string i_name, char i_gender);
 
     int getStr();
     int getIntel();
