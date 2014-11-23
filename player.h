@@ -4,11 +4,15 @@ Holden McGinnis
 CIS 190 Final Project
 player.h - controls all data and functions relating to the player's character
 
-Str, intel, wisd, dext, cons, charisma are all capped at 20
+Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
  */
 
 #ifndef PLAYER_H
 #define PLAYER_H
+
+#define MALE 'm'
+#define FEMALE 'f'
+#define LEVELEXP 100
 
 #include <string>
 
@@ -31,6 +35,16 @@ class Player {
     int getWeight();
     string getName();
     char getGender();
+    int getLevel();
+    int getEXP();
+    int getGold();
+    int getMana();
+
+
+    void incrExp(int addedExp);
+    void changeMana(int manaChange);
+    void changeGold(int moneyChange);
+
 
 
   private:
@@ -38,6 +52,7 @@ class Player {
      exp, mana, gold;
     string name;
     char gender;
+    void LevelUp();
 };
 
 #endif

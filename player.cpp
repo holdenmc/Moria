@@ -8,6 +8,8 @@ player.cpp - implementations for player.h
 #include <string>
 #include "player.h"
 
+using namespace std;
+
 // Default player constructor. If you didn't give inputs, you know nothing.
 Player::Player() {
   name = "John Snow";
@@ -32,9 +34,16 @@ Player::Player() {
 Player::Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons, 
         int i_charisma, int i_age, string i_name, char i_gender) {
   name = i_name;
-  if () {
+  if (gender == MALE || gender == FEMALE) {
     gender = i_gender;
+  } else {
+    //cout << "CHOSE AN INVALID GENDER";
+    //Goes to default gender;
+    gender = FEMALE;
   }
+  
+
+
 
 
 }
@@ -62,6 +71,7 @@ int Player::getCons() {
 int Player::getChar() {
   return charisma;
 }
+
 //In inches
 int Player::getAge() {
   return age;
@@ -82,3 +92,44 @@ string Player::getName() {
 char Player::getGender() {
   return gender;
 }
+
+int Player::getLevel() {
+  return level;
+}
+
+int Player::getEXP() {
+  return exp;
+}
+
+int Player::getGold() {
+  return gold;
+}
+
+int Player::getMana() {
+  return mana;
+}
+
+void Player::incrExp(int addedExp) {
+  exp += addedExp;
+
+  //Levels up every 100 points
+  if (exp >= level*LEVELEXP) {
+    LevelUp();
+  }
+
+}
+
+void Player::changeMana(int manaChange) {
+  mana += manaChange;
+}
+
+void Player::changeGold(int moneyChange) {
+  gold += moneyChange;
+}
+
+void Player::LevelUp() {
+  //Calls some sort of menu where the player hits inputs to choose what stats
+  //to upgrade
+}
+
+
