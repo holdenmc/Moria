@@ -4,11 +4,11 @@
 # Desc:   Makefile for Fall 2014 CIS 190 Final Project
 #
 
-recover: main.o player.o utils.o town.o store.o map.o
+moria: main.o player.o utils.o town.o store.o map.o
 	g++ main.o player.o utils.o town.o store.o map.o -o moria
 
 # rules to compile the individual .o files
-main: main.cpp
+main.o: main.cpp
 	g++ -c -Wall main.cpp
 player.o: player.cpp
 	g++ -c -Wall player.cpp
@@ -28,7 +28,7 @@ map.o: map.cpp
 
 # removes .o and executable files
 clean:
-	rm  -f hw6.o helper.o trainCar.o hw6 
+	rm  -f main.o player.o utils.o town.o store.o map.o moria 
 
 # removes any temporary (~) files
 cleaner: 
