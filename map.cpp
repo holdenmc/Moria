@@ -30,6 +30,9 @@ Map::Map () {
     tiles[i][0] = '#';
     tiles[i][COLS - 1] = '#';
   }
+
+  playerLocRow = playerLocCol = 1; //default player location row 1 col 1
+  tiles[playerLocRow][playerLocCol] = 'p';
 }
 
 void Map::setTiles(int row, int col, char val) {
@@ -48,3 +51,35 @@ void Map::drawMap() {
   }
 }
 
+void Map::movePlayer(char direction) {
+  if (direction == 'w') {
+    //check for empty space...
+    if (tiles[playerLocRow - 1][playerLocCol] == '.') {
+      tiles[playerLocRow][playerLocCol] = '.';
+
+      playerLocRow--;
+      tiles[playerLocRow][playerLocCol] = 'p';
+    }
+  } else if (direction == 'a') {
+    if (tiles[playerLocRow][playerLocCol - 1] == '.') {
+      tiles[playerLocRow][playerLocCol] = '.';
+
+      playerLocCol--;
+      tiles[playerLocRow][playerLocCol] = 'p';
+    }
+  } else if (direction == 's') {
+    if (tiles[playerLocRow + 1][playerLocCol] == '.') {
+      tiles[playerLocRow][playerLocCol] = '.';
+
+      playerLocRow++;
+      tiles[playerLocRow][playerLocCol] = 'p';
+    }
+  } else if (direction == 'd') {
+    if (tiles[playerLocRow][playerLocCol + 1] == '.') {
+      tiles[playerLocRow][playerLocCol] = '.';
+
+      playerLocCol++;
+      tiles[playerLocRow][playerLocCol] = 'p';
+    }
+  }
+}

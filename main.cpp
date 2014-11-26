@@ -44,11 +44,18 @@ int main() {
 
   Town* townMap = new Town(&stores);
   bool done = false; //true when we want to exit game loop
+  char input;
 
-  //while (!done) {
+  while (!done) {
     DrawGame(townMap, thePlayer);
 
-    int x;
-    cin >> x;
-  //}
+    cin >> input;
+
+    //build this into functionality later... just for debugging
+    if (input == 'q') {
+      done = 1;
+    }
+
+    townMap->movePlayer(input);
+  }
 }
