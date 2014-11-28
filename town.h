@@ -30,13 +30,6 @@ class Town: public Map {
     //NOTE: 'door' field in stores should be unique - no other store in vector
     //  should have the same 'door' char (if you want good performance)
     Town(vector<Store*> *stores, Player* thePlayer);
-    //given w a s d, performs an action in the corresponding direction - if the
-    //space is empty, causes movement; if the space is a store entrance, enter
-    //the store.
-    //NOTE: does nothing if not w a s d input
-    //*choose to put this in Town, NOT Map since movement in a Town is different
-    //from movement in a dungeon, for example (store interaction)
-    void performActionInDirection(char direction);
     //while Player is in Town, advances game based on user input char- wasd etc.
     //returns 1 if user entered 'q' at valid time to end program
     bool performTownAction(char input);
@@ -47,6 +40,13 @@ class Town: public Map {
     //if store overlaps with other stores or has valid values. does NOT store
     //the store in the *stores vector (private below)
     void addStore(Store* aStore);
+    //given w a s d, performs an action in the corresponding direction - if the
+    //space is empty, causes movement; if the space is a store entrance, enter
+    //the store.
+    //NOTE: does nothing if not w a s d input
+    //*choose to put this in Town, NOT Map since movement in a Town is different
+    //from movement in a dungeon, for example (store interaction)
+    void performActionInDirection(char direction);
     //goes through stores and checks if there is a store with matching door
     //returns pointer to this store if it exists, NULL pointer if not
     Store* getStoreFromDoor(char door);

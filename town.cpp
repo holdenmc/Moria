@@ -22,6 +22,27 @@ Town::Town (vector<Store*> *stores, Player* thePlayer) {
   this->thePlayer = thePlayer;
 }
 
+bool Town::performTownAction(char input) {
+  if (input == 'q') {
+    return true;
+  } else {
+    performActionInDirection(input);
+  }
+
+  return false;
+}
+
+void Town::addStore(Store* aStore) {
+  int i, j;
+  for (i = aStore->getRow(); i < aStore->getRow() + aStore->getHeight(); i++) {
+    for (j = aStore->getCol(); j < aStore->getCol() + aStore->getWidth(); j++) {
+      tiles[i][j] = '#';
+    }
+  }
+
+  tiles[aStore->getRowEnt()][aStore->getColEnt()] = aStore->getDoor();
+}
+
 void Town::performActionInDirection(char direction) {
   if (direction == 'w') {
     //check for empty space...
@@ -69,27 +90,6 @@ void Town::performActionInDirection(char direction) {
       }
     }
   }
-}
-
-bool Town::performTownAction(char input) {
-  if (input == 'q') {
-    return true;
-  } else {
-    performActionInDirection(input);
-  }
-
-  return false;
-}
-
-void Town::addStore(Store* aStore) {
-  int i, j;
-  for (i = aStore->getRow(); i < aStore->getRow() + aStore->getHeight(); i++) {
-    for (j = aStore->getCol(); j < aStore->getCol() + aStore->getWidth(); j++) {
-      tiles[i][j] = '#';
-    }
-  }
-
-  tiles[aStore->getRowEnt()][aStore->getColEnt()] = aStore->getDoor();
 }
 
 Store* Town::getStoreFromDoor(char door) {
