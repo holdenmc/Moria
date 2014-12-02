@@ -163,6 +163,13 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   char currentChar = '0';
   vector<string> items = theStore->getItems();
   vector<int> prices = theStore->getPrices();
+  string instruct = "Enter # of Item to buy";
+
+  //Write out instructions
+  for(j = 0; j < instruct.length(); j++) {
+      currentChar = instruct.at(j);
+      tiles[BUY_MENU_START_ROW + 1][BUY_MENU_START_COL + 1 + j] = currentChar;
+  }
 
   //set boundaries - run in square row 1 row 10 col 33 col 64
   i = BUY_MENU_START_COL;
@@ -176,6 +183,20 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   while (i <= BUY_MENU_END_ROW) {
     tiles[i][BUY_MENU_START_COL] = '|';
     tiles[i][BUY_MENU_END_COL] = '|';
+    i++;
+  }
+
+  //Write the numbers for the items
+  currentChar = '0';
+  i = BUY_MENU_START_ROW + MENU_SPACING;
+  while (i <= BUY_MENU_END_ROW - MENU_SPACING) {
+    tiles[i][BUY_MENU_START_COL + 1] = currentChar;
+
+    if (currentChar <= '0' + (COL_MAX - MENU_SPACING)) {
+      tiles[i][BUY_MENU_START_COL + 1 + MENU_SPACING + PRINTED_STRING_LEN + 
+        PRICE_DIGITS] = currentChar + 5;
+    }
+    currentChar++;
     i++;
   }
 
@@ -223,9 +244,5 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     }
 
   }
-
-
-
-
 
 }
