@@ -180,6 +180,13 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   vector<int> prices = theStore->getPrices();
   string instruct = "Enter # of Item to buy";
 
+  //Clear out the entire space until it's populated later
+  for(i = BUY_MENU_START_ROW; i <= BUY_MENU_END_ROW; i++) {
+    for(j = BUY_MENU_START_COL; j <= BUY_MENU_END_COL; j++) {
+      tiles[i][j] = ' ';
+    }
+  }
+
   //Write out instructions
   for(j = 0; j < instruct.length(); j++) {
       currentChar = instruct.at(j);
@@ -208,7 +215,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     tiles[i][BUY_MENU_START_COL + 1] = currentChar;
 
     if (currentChar <= '0' + (COL_MAX - MENU_SPACING)) {
-      tiles[i][BUY_MENU_START_COL + 1 + MENU_SPACING + PRINTED_STRING_LEN + 
+      tiles[i][BUY_MENU_START_COL + 2 + MENU_SPACING + PRINTED_STRING_LEN + 
         PRICE_DIGITS] = currentChar + 5;
     }
     currentChar++;
@@ -217,7 +224,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
 
   //Iterates the first column of items
   for (itemNum = 0; itemNum < COL_MAX && itemNum < items.size(); itemNum++) {
-    i = BUY_MENU_START_COL + MENU_SPACING;
+    i = BUY_MENU_START_COL + MENU_SPACING + 1;
     j = 0;
 
     currString = items.at(itemNum);
@@ -228,7 +235,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     }
     
     i += PRINTED_STRING_LEN;
-    currString = to_string(prices.at(itemNum));
+    currString = toString(prices.at(itemNum));
     for(j = 0; j < currString.length() && j < PRICE_DIGITS; j++) {
       currentChar = currString.at(j);
       tiles[BUY_MENU_START_ROW + itemNum + MENU_SPACING][i+j] = currentChar;
@@ -238,7 +245,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   int firstColumnSpace = MENU_SPACING + PRINTED_STRING_LEN + PRICE_DIGITS;
   if (items.size() > COL_MAX)
   for (itemNum = COL_MAX; itemNum < items.size(); itemNum++) {
-    i = BUY_MENU_START_COL + MENU_SPACING + firstColumnSpace;
+    i = BUY_MENU_START_COL + MENU_SPACING + firstColumnSpace + 2;
     j = 0;
 
     currString = items.at(itemNum);
@@ -250,7 +257,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     }
     
     i += PRINTED_STRING_LEN;
-    currString = to_string(prices.at(itemNum));
+    currString = toString(prices.at(itemNum));
     for(j = 0; j < currString.length() && j < PRICE_DIGITS; j++) {
       currentChar = currString.at(j);
       tiles[BUY_MENU_START_ROW + itemNum - COL_MAX + MENU_SPACING][i+j] 

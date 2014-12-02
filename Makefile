@@ -4,8 +4,8 @@
 # Desc:   Makefile for Fall 2014 CIS 190 Final Project
 #
 
-moria: main.o player.o utils.o town.o store.o map.o dungeon.o
-	g++ main.o player.o utils.o town.o store.o map.o dungeon.o -o moria
+moria: main.o player.o utils.o town.o store.o map.o dungeon.o item.o
+	g++ main.o player.o utils.o town.o store.o map.o dungeon.o item.o -o moria
 
 # rules to compile the individual .o files
 main.o: main.cpp
@@ -22,6 +22,8 @@ map.o: map.cpp
 	g++ -c -Wall map.cpp
 dungeon.o: dungeon.cpp
 	g++ -c -Wall dungeon.cpp
+item.o: item.cpp
+	g++ -c -Wall item.cpp
 
 
 ########################################

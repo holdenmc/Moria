@@ -26,6 +26,6 @@ void DrawGame(Map* theMap, Player* thePlayer);
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer);
 
 //since g++ likes to be annoying with to_string -_-
-string to_string(int number);
+string toString(int number);
 
 #endif

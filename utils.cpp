@@ -36,7 +36,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   
 }
 
-string to_string(int number) {
+string toString(int number) {
   ostringstream stream;
   stream << number;
   return stream.str();
