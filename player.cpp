@@ -265,7 +265,7 @@ void Player::refreshStats() {
   int char_boost = 0;
   int dext_boost = 0;
 
-  for (int i = 0; i < items.size(); i++) {
+  for (unsigned int i = 0; i < items.size(); i++) {
     if (items.at(i).getEquip()) {
       switch(items.at(i).getIndicator()) {
 

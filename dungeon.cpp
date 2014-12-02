@@ -46,9 +46,10 @@ void Dungeon::enterDungeonLoop() {
 
 bool Dungeon::performDungeonAction(char input) {
   //add in specific user commands besides movement here if necessary
-  /*if (input == 'q') {
-    return true;
-  }*/
+  if (input == 'p') {
+    thePlayer->drinkHealthPot();
+    return false;
+  }
 
   return performActionInDirection(input);
 }
