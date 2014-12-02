@@ -327,9 +327,37 @@ void Player::refreshStats() {
 }
 
 void Player::levelUp() {
-  //THIS NEEDS TO BE DONE
-  //Calls some sort of menu where the player hits inputs to choose what stats
-  //to upgrade
+  health++;
+
+  cout << "Level up: choose what stat you would like to increase by 1:" << endl
+    << "1 - strength" << endl << "2 - constitution" << endl
+    << "3 - intelligence" << endl << "4 - dexterity" << endl
+    << "5 - charisma" << endl;
+
+  int choice;
+  bool done = false;
+  while (!done) {
+    cin >> choice;
+    if (choice > 0 && choice <= 5) {
+      done = true;
+    } else {
+      cout << "Invalid choice - try again: ";
+    }
+  }
+
+  if (choice == 1) {
+    base_str++;
+  } else if (choice == 2) {
+    base_cons++;
+  } else if (choice == 3) {
+    base_intel++;
+  } else if (choice == 4) {
+    base_dext++;
+  } else {
+    base_char++;
+  }
+
+  refreshStats();
 }
 
 int Player::battleMonster(Monster* theMonster, bool playerFirst) {
