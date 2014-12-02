@@ -19,7 +19,7 @@ Player::Player() {
   gender = 'm';
   str = DEF_STAT;
   intel = DEF_STAT;
-  wisd = DEF_STAT;
+  health = DEF_HEALTH;
   dext = DEF_STAT;
   cons = DEF_STAT;
   charisma = DEF_STAT;
@@ -34,7 +34,7 @@ Player::Player() {
 
 }
 
-Player::Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons, 
+Player::Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons, 
         int i_charisma, int i_age, int i_height, int i_weight,
         string i_name, char i_gender) {
   name = i_name;
@@ -63,12 +63,12 @@ Player::Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons,
     intel = DEF_STAT;
   }
 
-  if(i_wisd <= 20 && i_wisd > 0) {
-    wisd = i_wisd;
+  if(health < 20) {
+    health = i_height;
   } else {
-    cout << "CHOSE AN INVALID WISDOM";
+    cout << "CHOSE AN INVALID HEALTH";
     //Goes to default
-    wisd = DEF_STAT;
+    health = DEF_HEALTH;
   }
 
   if(i_dext <= 20 && i_dext > 0) {
@@ -133,8 +133,8 @@ int Player::getIntel() {
   return intel;
 }
 
-int Player::getWisd() {
-  return wisd;
+int Player::getHealth() {
+  return health;
 }
 
 int Player::getDext() {
