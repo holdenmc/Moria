@@ -323,5 +323,9 @@ void Player::levelUp() {
 
 void Player::battleMonster(Monster* theMonster, bool playerFirst) {
   //TODO
-  cout << "HELP " << endl << endl;
+  if (playerFirst) {
+    cout << "HELP " << endl << endl;
+  } else {
+    cout << "DIE " << endl << endl;
+  }
 }

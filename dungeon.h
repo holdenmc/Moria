@@ -71,6 +71,11 @@ class Dungeon: public Map {
     //similar to getStoreFromDoor in Town, checks w a s d direction and returns
     //the monster in that immediate direction if it exists; NULL otherwise
     Monster* getMonsterInDirection(char direction);
+    //to be called if user moves to empty space '.'; takes every monster
+    //except boss and moves it towards the player or attacks if directly 
+    //neighboring the player
+    // -> monsters break through rocks :)
+    void moveMonsters();
     //makes the next level of the dungeon - called when user finishes current
     //dungon - max 6 levels of dungeons
     //returns NULL if this is the 6th level of a dungeon

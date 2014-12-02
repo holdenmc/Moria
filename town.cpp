@@ -402,7 +402,7 @@ void Town::handleInventory() {
       case 6:
       case 7:
       case 8:
-      case 9: if (inputInt < currItemList.size()) {
+      case 9: if (inputInt < (int)currItemList.size()) {
                 currItemList.at(inputInt).equip(thePlayer);
                 thePlayer->setItems(currItemList);
               }

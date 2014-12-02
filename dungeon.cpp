@@ -49,6 +49,9 @@ bool Dungeon::performDungeonAction(char input) {
   if (input == 'p') {
     thePlayer->drinkHealthPot();
     return false;
+  } else if (input == 'Q') {
+    cout << "You lose. Goodbye." << endl;
+    return true;
   }
 
   return performActionInDirection(input);
@@ -68,6 +71,7 @@ bool Dungeon::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocRow--;
       tiles[playerLocRow][playerLocCol] = 'p';
+      moveMonsters();
     } else if (tiles[playerLocRow - 1][playerLocCol] == '>') { //next level
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
@@ -86,6 +90,7 @@ bool Dungeon::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocCol--;
       tiles[playerLocRow][playerLocCol] = 'p';
+      moveMonsters();
     } else if (tiles[playerLocRow][playerLocCol - 1] == '>') {
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
@@ -104,6 +109,7 @@ bool Dungeon::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocRow++;
       tiles[playerLocRow][playerLocCol] = 'p';
+      moveMonsters();
     } else if (tiles[playerLocRow + 1][playerLocCol] == '>') {
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
@@ -122,6 +128,7 @@ bool Dungeon::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocCol++;
       tiles[playerLocRow][playerLocCol] = 'p';
+      moveMonsters();
     } else if (tiles[playerLocRow][playerLocCol + 1] == '>') {
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
@@ -174,6 +181,58 @@ Monster* Dungeon::getMonsterInDirection(char direction) {
   //monster not found or input is not wasd, give null (although we expect our 
   //program to only ever feed wasd to this function)
   return NULL; 
+}
+
+void Dungeon::moveMonsters() {
+  for (unsigned int i = 0; i < monsters.size(); i++) {
+    Monster* theMonster = monsters[i];
+    //move up/down
+    if (theMonster->row > playerLocRow 
+        && (tiles[theMonster->row - 1][theMonster->col] == '.'
+          || tiles[theMonster->row - 1][theMonster->col] == '#'
+          || tiles[theMonster->row - 1][theMonster->col] == 'p')) {
+      if (tiles[theMonster->row - 1][theMonster->col] == 'p') {
+        thePlayer->battleMonster(theMonster, false);
+      } else {
+        tiles[theMonster->row][theMonster->col] = '.';
+        theMonster->row--;
+        tiles[theMonster->row][theMonster->col] = theMonster->getName();
+      }
+    } else if (theMonster->row < playerLocRow 
+        && (tiles[theMonster->row + 1][theMonster->col] == '.'
+          || tiles[theMonster->row + 1][theMonster->col] == '#'
+          || tiles[theMonster->row + 1][theMonster->col] == 'p')) {
+      if (tiles[theMonster->row + 1][theMonster->col] == 'p') {
+        thePlayer->battleMonster(theMonster, false);
+      } else {
+        tiles[theMonster->row][theMonster->col] = '.';
+        theMonster->row++;
+        tiles[theMonster->row][theMonster->col] = theMonster->getName();
+      }
+    } else if (theMonster->col > playerLocCol 
+        && (tiles[theMonster->row][theMonster->col - 1] == '.'
+          || tiles[theMonster->row][theMonster->col - 1] == '#'
+          || tiles[theMonster->row][theMonster->col - 1] == 'p')) {
+      if (tiles[theMonster->row][theMonster->col - 1] == 'p') {
+        thePlayer->battleMonster(theMonster, false);
+      } else {
+        tiles[theMonster->row][theMonster->col] = '.';
+        theMonster->col--;
+        tiles[theMonster->row][theMonster->col] = theMonster->getName();
+      }
+    } else if (theMonster->col < playerLocCol 
+        && (tiles[theMonster->row][theMonster->col + 1] == '.'
+          || tiles[theMonster->row][theMonster->col + 1] == '#'
+          || tiles[theMonster->row][theMonster->col + 1] == 'p')) {
+      if (tiles[theMonster->row][theMonster->col + 1] == 'p') {
+        thePlayer->battleMonster(theMonster, false);
+      } else {
+        tiles[theMonster->row][theMonster->col] = '.';
+        theMonster->col++;
+        tiles[theMonster->row][theMonster->col] = theMonster->getName();
+      }
+    }
+  }
 }
 
 Dungeon* Dungeon::next() {
