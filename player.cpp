@@ -9,6 +9,7 @@ player.cpp - implementations for player.h
 #include <iostream>
 #include <string>
 #include "player.h"
+#include "item.h"
 
 using namespace std;
 
@@ -213,7 +214,7 @@ void Player::addItem(Item newItem) {
 
 
 void Player::removeItem(string removeName) {
-  int i;
+  unsigned int i;
   for (i = 0; i < items.size(); i++) {
     if (removeName.compare(items.at(i).getName()) == 0) {
       break;

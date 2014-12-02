@@ -24,6 +24,7 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define DEF_MANA 50
 
 #include <string>
+#include <vector>
 
 
 using namespace std;

@@ -76,7 +76,7 @@ void Item::equip(Player* thePlayer) {
   //Check for equipped
   Item curr;
   vector<Item> list = thePlayer->getItems();
-  for(int i = 0; i < list.size(); i++) {
+  for (unsigned int i = 0; i < list.size(); i++) {
     
     curr = list.at(i);
     
