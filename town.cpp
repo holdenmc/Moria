@@ -180,9 +180,9 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   unsigned int i, j, itemNum;
   string currString;
   char currentChar = '0';
-  vector<string> items = theStore->getItems();
+  vector<Item> items = theStore->getItems();
   vector<int> prices = theStore->getPrices();
-  string instruct = "Enter # of Item to buy";
+  string instruct = "Enter # to buy, q to quit";
 
   //Clear out the entire space until it's populated later
   for(i = BUY_MENU_START_ROW; i <= BUY_MENU_END_ROW; i++) {
@@ -231,7 +231,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     i = BUY_MENU_START_COL + MENU_SPACING + 1;
     j = 0;
 
-    currString = items.at(itemNum);
+    currString = items.at(itemNum).getName();
     //Prints out the name of the item (first 8 chars)
     for(j = 0; j < currString.length(); j++) {
       currentChar = currString.at(j);
@@ -252,7 +252,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     i = BUY_MENU_START_COL + MENU_SPACING + firstColumnSpace + 2;
     j = 0;
 
-    currString = items.at(itemNum);
+    currString = items.at(itemNum).getName();
     //Prints out the name of the item (first 8 chars)
     for(j = 0; j < currString.length() && j < 2*COL_MAX; j++) {
       currentChar = currString.at(j);

@@ -11,6 +11,7 @@ store.h - contains information for a store that exists in the town
 
 #include <vector>
 #include <string>
+#include "item.h"
 
 #define STORE_SIZE 5 //basic store dimension - don't have to use this
 
@@ -22,7 +23,7 @@ class Store {
     //makes a store with given dimensions and upper left corner at (row, col)
     //and entrance at (rowEnt, colEnt) RELATIVE TO THE UPPER LEFT CORNER
     Store(int row, int col, int width, int height, int rowEnt, int colEnt, 
-        char door, vector<string> items, vector<int> prices);
+        char door, vector<Item> items, vector<int> prices);
     int getRow();
     int getCol();
     int getWidth();
@@ -30,7 +31,7 @@ class Store {
     int getRowEnt();
     int getColEnt();
     char getDoor();
-    vector<string> getItems();
+    vector<Item> getItems();
     vector<int> getPrices();
 
 
@@ -38,7 +39,7 @@ class Store {
     int row, col, width, height, rowEnt, colEnt;
     //char to represent the entrance when store is drawn
     char door;
-    vector<string> items;
+    vector<Item> items;
     vector<int> prices;
 };
 
