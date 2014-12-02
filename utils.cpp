@@ -18,6 +18,7 @@ Player* MakePlayer() {
   //Function to create a player with random attributes
   Player* result;
 
+  //NEED TO WRITE THIS AS A MENU SO THEY CAN RE-ROLL STATS
 
   result = new Player();
   return result;
@@ -39,7 +40,39 @@ void DrawGame(Map* theMap, Player* thePlayer) {
 }
 
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
-  //TODO: WRITE THIS STUFF
+  vector<Item> currItemList = theStore->getItems();
+  int storeInventorySize = currItemList.size();
+
+  if (itemNum >= storeInventorySize) { 
+    return;
+  }
+
+  int currGold = thePlayer->getGold();
+  int price = theStore->getPrices().at(itemNum);
+  int inventorySize = thePlayer->getItems().size();
+  
+  Item currItem = currItemList.at(itemNum);
+  
+
+  if (currGold < price) {
+    return;
+  } else if (inventorySize > 9) {
+    return;
+  } else {
+    currGold -= price;
+    thePlayer->addItem(currItem);
+
+    //Removes the item from the store
+    unsigned int i;
+    vector<Item> newItemList;
+    for (i = 0; i < currItemList.size(); i++) {
+      if (i != itemNum) {
+        newItemList.push_back(currItemList.at(i));
+      }
+    }
+    theStore->setItems(newItemList);
+
+  }
 
 }
 

@@ -65,6 +65,14 @@ class Town: public Map {
     //changes chars in map tiles to show buy menu 'overlay'
     //usually only called once per entering store's buy menu
     void updateTilesForBuyMenu(Store* theStore);
+    //Changes chars in map tiles to show inventory
+    //Called when player hits 'i'
+    void drawInventory();
+    //Selecting numbers while in function will equip/unequip items
+    //Called along with drawInventory
+    void handleInventory();
+
+
     Player* thePlayer;
 };
 

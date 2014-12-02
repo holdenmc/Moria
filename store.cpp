@@ -55,3 +55,8 @@ vector<Item> Store::getItems() {
 vector<int> Store::getPrices() {
   return prices;
 }
+
+void Store::setItems(vector<Item> newItemList) {
+  items = newItemList;
+  return;
+}

@@ -29,6 +29,8 @@ Town::Town (vector<Store*> *stores, Player* thePlayer) {
 bool Town::performTownAction(char input) {
   if (input == 'q') {
     return true;
+  } else if (input == 'i') {
+    handleInventory();
   } else {
     performActionInDirection(input);
   }
@@ -146,21 +148,19 @@ void Town::enterBuyMenu(Store theStore) {
     if (input == 'q') {
       done = true;
     }
-
+    inputInt = (int)input - 48;
     //Handles the potential buying options
-    switch(input) {
-      inputInt = input - '0';
-
-      case '0':
-      case '1': 
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9': transferItemFromStore(inputInt, &theStore, thePlayer);
+    switch(inputInt) {
+      case 0:
+      case 1: 
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9: transferItemFromStore(inputInt, &theStore, thePlayer);
                 break;
     }
 
@@ -269,3 +269,157 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     }
   }
 }
+
+void Town::drawInventory() {
+  unsigned int i, j, itemNum;
+  string currString;
+  char currentChar = '0';
+  vector<Item> items = thePlayer->getItems();
+  string instruct = "Enter # to (un)equip";
+
+  //Clear out the entire space until it's populated later
+  for(i = BUY_MENU_START_ROW; i <= BUY_MENU_END_ROW; i++) {
+    for(j = BUY_MENU_START_COL; j <= BUY_MENU_END_COL; j++) {
+      tiles[i][j] = ' ';
+    }
+  }
+
+  //Write out instructions
+  for(j = 0; j < instruct.length(); j++) {
+      currentChar = instruct.at(j);
+      tiles[BUY_MENU_START_ROW + 1][BUY_MENU_START_COL + 1 + j] = currentChar;
+  }
+
+  //set boundaries - run in square row 1 row 10 col 33 col 64
+  i = BUY_MENU_START_COL;
+  while (i <= BUY_MENU_END_COL) {
+    tiles[BUY_MENU_START_ROW][i] = '=';
+    tiles[BUY_MENU_END_ROW][i] = '=';
+    i++;
+  }
+
+  i = BUY_MENU_START_ROW;
+  while (i <= BUY_MENU_END_ROW) {
+    tiles[i][BUY_MENU_START_COL] = '|';
+    tiles[i][BUY_MENU_END_COL] = '|';
+    i++;
+  }
+
+  //Write the numbers for the items
+  currentChar = '0';
+  i = BUY_MENU_START_ROW + MENU_SPACING;
+  while (i <= BUY_MENU_END_ROW - MENU_SPACING) {
+    tiles[i][BUY_MENU_START_COL + 1] = currentChar;
+
+    if (currentChar <= '0' + (COL_MAX - MENU_SPACING)) {
+      tiles[i][BUY_MENU_START_COL + 2 + MENU_SPACING + PRINTED_STRING_LEN + 
+        PRICE_DIGITS] = currentChar + 5;
+    }
+    currentChar++;
+    i++;
+  }
+
+  //Iterates the first column of items
+  for (itemNum = 0; itemNum < COL_MAX && itemNum < items.size(); itemNum++) {
+    i = BUY_MENU_START_COL + MENU_SPACING + 1;
+    j = 0;
+
+    currString = items.at(itemNum).getName();
+    //Prints out the name of the item (first 8 chars)
+    for(j = 0; j < currString.length(); j++) {
+      currentChar = currString.at(j);
+      tiles[BUY_MENU_START_ROW + itemNum + MENU_SPACING][i+j] = currentChar;
+    }
+    
+    i += PRINTED_STRING_LEN;
+    if (items.at(itemNum).getEquip()) {
+      currentChar = 'E';
+      tiles[BUY_MENU_START_ROW + itemNum + MENU_SPACING][i] = currentChar;
+    }
+
+  }
+  int firstColumnSpace = MENU_SPACING + PRINTED_STRING_LEN + PRICE_DIGITS;
+  if (items.size() > COL_MAX)
+  for (itemNum = COL_MAX; itemNum < items.size(); itemNum++) {
+    i = BUY_MENU_START_COL + MENU_SPACING + firstColumnSpace + 2;
+    j = 0;
+
+    currString = items.at(itemNum).getName();
+    //Prints out the name of the item (first 8 chars)
+    for(j = 0; j < currString.length() && j < 2*COL_MAX; j++) {
+      currentChar = currString.at(j);
+      tiles[BUY_MENU_START_ROW + itemNum - COL_MAX + MENU_SPACING][i+j] 
+        = currentChar;
+    }
+    
+    i += PRINTED_STRING_LEN;
+    if (items.at(itemNum).getEquip()) {
+      currentChar = 'E';
+      tiles[BUY_MENU_START_ROW + itemNum - COL_MAX + MENU_SPACING][i] = currentChar;
+    }
+  }
+
+
+}
+
+void Town::handleInventory() {
+  int i, j;
+  char original[ROWS][COLS];
+  for (i = 0; i < ROWS; i++) {
+    for (j = 0; j < COLS; j++) {
+      original[i][j] = tiles[i][j];
+    }
+  }
+
+  drawInventory(); //Updates the tiles to be the inventory
+  DrawGame(this, thePlayer); //draw the screen now that values have been updated
+
+  bool done = false;
+  char input;
+  int inputInt = -1; //Initialize to an unused value
+  vector<Item> currItemList = thePlayer->getItems();
+  while (!done) {
+    cin >> input;
+
+    //Use the q key to exit the menu
+    if (input == 'q') {
+      done = true;
+    }
+    inputInt = (int)input - 48;
+    //Handles the potential buying options
+    switch(inputInt) {
+      case 0:
+      case 1: 
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9: if (inputInt < currItemList.size()) {
+                currItemList.at(inputInt).equip(thePlayer);
+                thePlayer->setItems(currItemList);
+              }
+              break;
+    }
+
+    drawInventory(); //Draw again now that equip is changed
+    DrawGame(this, thePlayer);
+  }
+
+  //done with inventory menu, return town map to previous state
+  for (i = 0; i < ROWS; i++) {
+    for (j = 0; j < COLS; j++) {
+      tiles[i][j] = original[i][j];
+    }
+  }
+
+
+}
+
+
+
+
+
+

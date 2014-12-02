@@ -226,6 +226,10 @@ void Player::changeGold(int moneyChange) {
   gold += moneyChange;
 }
 
+void Player::setItems(vector<Item> currItemList) {
+  items = currItemList;
+}
+
 void Player::addItem(Item newItem) {
   items.push_back(newItem);
 }

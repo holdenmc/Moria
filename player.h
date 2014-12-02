@@ -64,6 +64,7 @@ class Player {
     void removeItem(string removeName);
     void refreshStats();
     void drinkHealthPot();
+    void setItems(vector<Item> currItemList);
 
 
 

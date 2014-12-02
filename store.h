@@ -34,6 +34,7 @@ class Store {
     vector<Item> getItems();
     vector<int> getPrices();
 
+    void setItems(vector<Item> newItemList);
 
   private:
     int row, col, width, height, rowEnt, colEnt;
