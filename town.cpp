@@ -57,6 +57,7 @@ void Town::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow - 1][playerLocCol] == '>') { //enter dungeon
       Dungeon* firstDungeon = new Dungeon(thePlayer);
       firstDungeon->enterDungeonLoop();
+      delete(firstDungeon);
     } else if (tiles[playerLocRow - 1][playerLocCol] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow-1][playerLocCol]);
       if (possStore != NULL) {
@@ -71,6 +72,7 @@ void Town::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow][playerLocCol - 1] == '>') {
       Dungeon* firstDungeon = new Dungeon(thePlayer);
       firstDungeon->enterDungeonLoop();
+      delete(firstDungeon);
     } else if (tiles[playerLocRow][playerLocCol - 1] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow][playerLocCol-1]);
       if (possStore != NULL) {
@@ -85,6 +87,7 @@ void Town::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow + 1][playerLocCol] == '>') {
       Dungeon* firstDungeon = new Dungeon(thePlayer);
       firstDungeon->enterDungeonLoop();
+      delete(firstDungeon);
     } else if (tiles[playerLocRow + 1][playerLocCol] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow+1][playerLocCol]);
       if (possStore != NULL) {
@@ -99,6 +102,7 @@ void Town::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow][playerLocCol + 1] == '>') {
       Dungeon* firstDungeon = new Dungeon(thePlayer);
       firstDungeon->enterDungeonLoop();
+      delete(firstDungeon);
     } else if (tiles[playerLocRow][playerLocCol + 1] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow][playerLocCol+1]);
       if (possStore != NULL) {

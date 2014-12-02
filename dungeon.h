@@ -9,9 +9,10 @@ dungeon.h - specific instance of a map, user can fight monsters etc. and earn
 #ifndef DUNGEON_H
 #define DUNGEON_H
 
-
+#include <vector>
 #include "map.h"
 #include "player.h"
+#include "monster.h"
 
 #define MIN_CLUMPS 35
 #define CLUMP_RANGE 10
@@ -24,6 +25,20 @@ dungeon.h - specific instance of a map, user can fight monsters etc. and earn
 #define PLAYER_START_ROW 10
 #define PLAYER_START_COL 2
 #define MAX_DUNGEONS 6
+#define ONE_MONSTERS 5
+#define TWO_MONSTERS 7
+#define THREE_MONSTERS 5
+#define FOUR_MONSTERS 4
+#define FIVE_MONSTERS 7
+#define SIX_MONSTERS 5
+#define NUM_WEAK_MONS 4
+#define WEAK_MONS_MIN 0
+#define NUM_MED_MONS 5
+#define MED_MONS_MIN 4
+#define NUM_HIGH_MONS 4
+#define HIGH_MONS_MIN 9
+#define BOSS_MIN 13
+
 
 using namespace std;
 
@@ -44,10 +59,14 @@ class Dungeon: public Map {
   private:
     //1 through 6 to represent each level of dungeon (difficulty)
     int level;
+    vector<Monster*> monsters;
+    //for when you are done with the dungeon, call this to delete monsters
+    void deleteMonsters();
     //given w a s d, performs an action in the corresponding direction - if the
     //space is empty, causes movement, etc.
     //similar to same method in Town but specialized for dungeons
-    void performActionInDirection(char direction);
+    //difference: returns true if user opts to go back up stairs
+    bool performActionInDirection(char direction);
     //makes the next level of the dungeon - called when user finishes current
     //dungon - max 6 levels of dungeons
     //returns NULL if this is the 6th level of a dungeon
@@ -57,6 +76,11 @@ class Dungeon: public Map {
     void setupDungeon();
     //helper method to place monsters - depends on the Dungeon's level
     void spawnMonsters();
+    //spawns a weak monster, updates tiles and adds to monsters vector
+    void spawnWeakMonster();
+    void spawnMedMonster();
+    void spawnHighMonster();
+    void spawnBoss(); //based on current level of dungeon
 };
 
 

@@ -21,7 +21,7 @@ void MakePlayer(Player* thePlayer) {
 void DrawGame(Map* theMap, Player* thePlayer) {
   //draw status bar using player data
   cout << setw(11) << left << thePlayer->getName() << "STR:" << setw(7) 
-    << thePlayer->getStr() << "WIS:" << setw(7) << thePlayer->getWisd() 
+    << thePlayer->getStr() << "HP:" << setw(8) << thePlayer->getHealth() 
     << "CON:" << setw(7) << thePlayer->getCons() << "LEV:" << setw(7) 
     << thePlayer->getLevel() << "MANA:" << setw(7) << thePlayer->getMana() 
     << endl << setw(11) << thePlayer->getGender() << "INT:" << setw(7) 

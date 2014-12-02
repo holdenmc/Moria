@@ -22,8 +22,10 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define DEF_WEIGHT_F 135
 #define DEF_GOLD 200
 #define DEF_MANA 50
+#define DEF_HEALTH 20
 
 #include <string>
+#include <vector>
 
 
 using namespace std;
@@ -31,13 +33,13 @@ class Item;
 class Player {
   public:
     Player();
-    Player(int i_str, int i_intel, int i_wisd, int i_dext, int i_cons, 
+    Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons, 
         int i_charisma, int i_age, int i_height, int i_weight,
         string i_name, char i_gender);
 
     int getStr();
     int getIntel();
-    int getWisd();
+    int getHealth();
     int getDext();
     int getCons();
     int getChar();
@@ -63,7 +65,7 @@ class Player {
 
 
   private:
-    int str, intel, wisd, dext, cons, charisma, age, height, weight, level,
+    int str, intel, health, dext, cons, charisma, age, height, weight, level,
      exp, mana, gold;
     string name;
     char gender;

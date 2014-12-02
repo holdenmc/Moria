@@ -28,6 +28,7 @@ town.h - specific instance of a map, contains thed default shops that the player
 #define DUNGEON_ENT_ROW    2 //location of dungeon in any town instance
 #define DUNGEON_ENT_COL    32
 
+
 using namespace std;
 
 class Town: public Map {
