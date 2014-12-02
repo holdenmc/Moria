@@ -3,7 +3,7 @@ Conor Ryan
 Holden McGinnis
 CIS 190 Final Project
 dungeon.h - specific instance of a map, user can fight monsters etc. and earn
-  gold or die
+  gold and exp or die
  */
 
 #ifndef DUNGEON_H
@@ -38,6 +38,7 @@ dungeon.h - specific instance of a map, user can fight monsters etc. and earn
 #define NUM_HIGH_MONS 4
 #define HIGH_MONS_MIN 9
 #define BOSS_MIN 13
+#define GOLD_CONST 50
 
 
 using namespace std;
@@ -90,6 +91,11 @@ class Dungeon: public Map {
     void spawnMedMonster();
     void spawnHighMonster();
     void spawnBoss(); //based on current level of dungeon
+    //takes the result from thePlayer->battleMonster() as code and processes how
+    //the game should look given that player or monster may or may not have died
+    //assumes code is 0, 1, or 2, and theMonster is the monster that the player
+    //just battled
+    void processBattleResult(int code, Monster* theMonster);
 };
 
 

@@ -406,9 +406,9 @@ void Town::handleInventory() {
       case 7:
       case 8:
       case 9: chosenItem = currItemList.at(inputInt);
-              if (inputInt < thePlayer->getItems().size()) {
+              if (inputInt < (int)thePlayer->getItems().size()) {
                 currItemList.at(inputInt).setEquip(!chosenItem.getEquip());
-                for (i = 0; i < currItemList.size(); i++) {
+                for (i = 0; i < (int)currItemList.size(); i++) {
                   currItem = currItemList.at(i);
                   if (chosenItem.getType() == currItem.getType() 
                     && currItem.getEquip()
