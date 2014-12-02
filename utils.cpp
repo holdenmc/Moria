@@ -59,18 +59,22 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   } else if (inventorySize > 9) {
     return;
   } else {
-    currGold -= price;
+    thePlayer->changeGold(-1*price);
     thePlayer->addItem(currItem);
 
     //Removes the item from the store
     unsigned int i;
     vector<Item> newItemList;
+    vector<int> currPriceList = theStore->getPrices();
+    vector<int> newPriceList;
     for (i = 0; i < currItemList.size(); i++) {
       if (i != itemNum) {
         newItemList.push_back(currItemList.at(i));
+        newPriceList.push_back(currPriceList.at(i));
       }
     }
     theStore->setItems(newItemList);
+    theStore->setPrices(newPriceList);
 
   }
 

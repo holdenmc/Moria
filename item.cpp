@@ -90,6 +90,10 @@ void Item::equip(Player* thePlayer) {
       }
     
     }
+  } 
+  if (equipped == false) {
+    equipped = true;
+    thePlayer->refreshStats();
   }
 
   

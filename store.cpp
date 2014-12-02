@@ -60,3 +60,8 @@ void Store::setItems(vector<Item> newItemList) {
   items = newItemList;
   return;
 }
+
+void Store::setPrices(vector<int> newPriceList) {
+  prices = newPriceList;
+}
+
