@@ -128,7 +128,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     }
   }
   level = 1;
-  exp = 0;
+  expe = 0;
   mana = DEF_MANA * intel/8;
   gold = DEF_GOLD + (charisma - 8)*10;
 
