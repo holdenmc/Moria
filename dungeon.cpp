@@ -476,6 +476,11 @@ void Dungeon::processBattleResult(int code, Monster* theMonster) {
     monsters.erase(monsters.begin() + i);
     delete(theMonster);
     if (monsters.empty()) {
+      //win condition
+      if (level == MAX_DUNGEONS) {
+        cout << "You defeated the Balrog and his minions; you win!" << endl;
+        exit(2);
+      }
       //remove rocks that were spawned around stairs to allow access to next
       tiles[PLAYER_START_ROW][COLS - 3] = '.';
       tiles[PLAYER_START_ROW - 1][COLS - 3] = '.';

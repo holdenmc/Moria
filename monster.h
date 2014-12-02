@@ -14,31 +14,31 @@ monster.h - controls monsters that exist in dungeons, contains some preset
 //weak consts
 #define WEAK_HEALTH_MIN 9
 #define WEAK_HEALTH_RANGE 2
-#define WEAK_STR_MIN 10
+#define WEAK_STR_MIN 11
 #define WEAK_STR_RANGE 2
 //medium consts
 #define MED_HEALTH_MIN 18
 #define MED_HEALTH_RANGE 4
-#define MED_STR_MIN 14
+#define MED_STR_MIN 15
 #define MED_STR_RANGE 4
 //high consts
 #define HIGH_HEALTH_MIN 25
 #define HIGH_HEALTH_RANGE 5
-#define HIGH_STR_MIN 18
+#define HIGH_STR_MIN 19
 #define HIGH_STR_RANGE 4
 //boss specifics
 #define WALRUS_HEALTH 13
-#define WALRUS_STRENGTH 13
+#define WALRUS_STRENGTH 14
 #define UNICORN_HEALTH 20
-#define UNICORN_STRENGTH 18
+#define UNICORN_STRENGTH 19
 #define SMALLDRAGON_HEALTH 25
-#define SMALLDRAGON_STRENGTH 21
+#define SMALLDRAGON_STRENGTH 22
 #define MOTHER_HEALTH 25
-#define MOTHER_STRENGTH 25
+#define MOTHER_STRENGTH 26
 #define DRAGON_HEALTH 35
-#define DRAGON_STRENGTH 28
+#define DRAGON_STRENGTH 29
 #define BALROG_HEALTH 45
-#define BALROG_STRENGTH 38
+#define BALROG_STRENGTH 39
 
 
 using namespace std;
