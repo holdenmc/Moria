@@ -21,5 +21,8 @@ void MakePlayer(Player* thePlayer);
 //draws the screen given map and status bar
 void DrawGame(Map* theMap, Player* thePlayer);
 
+//Transfers an item from the store to the player
+void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer);
+
 
 #endif
