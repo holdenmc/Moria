@@ -220,10 +220,10 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   //Write the numbers for the items
   currentChar = '0';
   i = BUY_MENU_START_ROW + MENU_SPACING;
-  while (i <= BUY_MENU_END_ROW - MENU_SPACING) {
+  while (i <= BUY_MENU_END_ROW - MENU_SPACING - 1) {
     tiles[i][BUY_MENU_START_COL + 1] = currentChar;
 
-    if (currentChar <= '0' + (COL_MAX - MENU_SPACING)) {
+    if (currentChar <= '0' + (COL_MAX - MENU_SPACING + 1)) {
       tiles[i][BUY_MENU_START_COL + 2 + MENU_SPACING + PRINTED_STRING_LEN + 
         PRICE_DIGITS] = currentChar + 5;
     }
@@ -313,10 +313,10 @@ void Town::drawInventory() {
   //Write the numbers for the items
   currentChar = '0';
   i = BUY_MENU_START_ROW + MENU_SPACING;
-  while (i <= BUY_MENU_END_ROW - MENU_SPACING) {
+  while (i <= BUY_MENU_END_ROW - MENU_SPACING - 1) {
     tiles[i][BUY_MENU_START_COL + 1] = currentChar;
 
-    if (currentChar <= '0' + (COL_MAX - MENU_SPACING)) {
+    if (currentChar <= '0' + (COL_MAX - MENU_SPACING + 1)) {
       tiles[i][BUY_MENU_START_COL + 2 + MENU_SPACING + PRINTED_STRING_LEN + 
         PRICE_DIGITS] = currentChar + 5;
     }
@@ -391,7 +391,10 @@ void Town::handleInventory() {
       done = true;
     }
     inputInt = (int)input - 48;
-    //Handles the potential buying options
+    //Handles the potential equipping options
+    
+    Item currItem;
+    Item chosenItem;
     switch(inputInt) {
       case 0:
       case 1: 
@@ -402,15 +405,27 @@ void Town::handleInventory() {
       case 6:
       case 7:
       case 8:
-      case 9: if (inputInt < currItemList.size()) {
-                currItemList.at(inputInt).equip(thePlayer);
+      case 9: chosenItem = currItemList.at(inputInt);
+              if (inputInt < thePlayer->getItems().size()) {
+                currItemList.at(inputInt).setEquip(!chosenItem.getEquip());
+                for (i = 0; i < currItemList.size(); i++) {
+                  currItem = currItemList.at(i);
+                  if (chosenItem.getType() == currItem.getType() 
+                    && currItem.getEquip()
+                    && chosenItem.getName().compare(currItem.getName()) != 0) {
+                    
+                    currItemList.at(i).setEquip(false);
+                  }
+                }
                 thePlayer->setItems(currItemList);
               }
               break;
     }
 
     drawInventory(); //Draw again now that equip is changed
+    thePlayer->refreshStats();
     DrawGame(this, thePlayer);
+
   }
 
   //done with inventory menu, return town map to previous state
