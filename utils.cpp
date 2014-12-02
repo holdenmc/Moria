@@ -7,6 +7,8 @@ utils.h - implementation for utils.h
 
 #include <iomanip>
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "player.h"
 #include "town.h"
 
@@ -32,4 +34,10 @@ void DrawGame(Map* theMap, Player* thePlayer) {
 
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   
+}
+
+string to_string(int number) {
+  ostringstream stream;
+  stream << number;
+  return stream.str();
 }

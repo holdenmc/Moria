@@ -10,6 +10,7 @@ utils.h - delcarations for general utility functions to assist in basic game
 
 
 #include <vector>
+#include <string>
 #include "player.h"
 #include "town.h"
 #include "store.h"
@@ -24,5 +25,7 @@ void DrawGame(Map* theMap, Player* thePlayer);
 //Transfers an item from the store to the player
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer);
 
+//since g++ likes to be annoying with to_string -_-
+string to_string(int number);
 
 #endif
