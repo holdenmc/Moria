@@ -63,12 +63,8 @@ class Town: public Map {
     void enterBuyMenu(Store theStore);
     //changes chars in map tiles to show buy menu 'overlay'
     //usually only called once per entering store's buy menu
-<<<<<<< HEAD
-    void updateTilesForBuyMenu(Store theStore);
-=======
     void updateTilesForBuyMenu(Store* theStore);
     Player* thePlayer;
->>>>>>> origin/master
 };
 
 
