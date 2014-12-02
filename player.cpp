@@ -48,7 +48,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
         string i_name, char i_gender) {
   name = i_name;
 
-  if (gender == MALE || gender == FEMALE) {
+  if (i_gender == MALE || i_gender == FEMALE) {
     gender = i_gender;
   } else {
     cout << "CHOSE AN INVALID GENDER";
@@ -127,8 +127,16 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
       height = DEF_HEIGHT_F;
     }
   }
+  level = 1;
+  exp = 0;
+  mana = DEF_MANA * intel/8;
+  gold = DEF_GOLD + (charisma - 8)*10;
 
   healthPots = 0;
+  if (charisma > 15) {
+    healthPots++;
+  }
+
   base_str = str; 
   base_intel = intel; 
   base_dext = dext; 

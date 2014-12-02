@@ -17,10 +17,75 @@ using namespace std;
 Player* MakePlayer() {
   //Function to create a player with random attributes
   Player* result;
+  char input;
+  string name;
+  char gender;
+  int str, intel, dext, cons, charisma, age, height, weight;
+  bool done = false;
 
   //NEED TO WRITE THIS AS A MENU SO THEY CAN RE-ROLL STATS
+  cout << "Name : ";
+  getline(cin, name);
+  cout << "Gender (type m or f): "; 
+  cin >> gender;
+  while (gender != 'm' && gender != 'f') {
+    cout << "Try again.  m for male, f for female." << endl;
+    cin >> gender;
+  }
 
-  result = new Player();
+  cout << "Age: ";
+  cin >> age;
+  while (age < 0 || age > 99) {
+    cout << "Try again.  Valid ages are between 1 and 99." << endl;
+    cin >> gender;
+  }
+
+  while (!done) {
+    
+    if (gender == 'm') {
+      str = rand() % 18 + 3;
+      intel = rand() % 20 + 1;
+      dext = rand() % 20 + 1;
+      cons = rand() % 18 + 3;
+      charisma = rand() % 20 + 1;
+      height = rand() % 20 + 68;
+      weight = rand() % 100 + 180;
+
+    } else {
+      str = rand() % 18 + 3;
+      intel = rand() % 20 + 1;
+      dext = rand() % 20 + 1;
+      cons = rand() % 20 + 1;
+      charisma = rand() % 18 + 3;
+      height = rand() % 20 + 62;
+      weight = rand() % 50 + 140;
+    }
+
+    cout << setw(11) << left << name << "STR:" << setw(7) << str <<  "CON:" 
+    << setw(7) << cons << "INT:" << setw(7) << intel << "DEX:" << setw(7) 
+    << dext << "CHA:" << setw(7) << charisma << endl << "Height:" << setw(7) 
+    << height << "Weight:" << setw(7) << weight << endl;
+
+    cout << endl << "Hit r to reroll.  Hit d to finish" << endl;
+
+    cin >> input;
+
+    while (input != 'd' && input != 'r') {
+      cout << "Try again.  r to re-roll, d to finish creation" << endl;
+      cin >> input;
+    }
+
+    switch(input) {
+      case 'd': done = true;
+                break;
+      
+      case 'r': break;
+    }
+
+  }
+
+  result = new Player(str, intel, dext, cons, charisma, age, height, 
+                      weight, name, gender);
   return result;
 }
 
