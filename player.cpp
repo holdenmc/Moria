@@ -27,7 +27,7 @@ Player::Player() {
   age = DEF_AGE;
   height = DEF_HEIGHT_M;
   weight = DEF_WEIGHT_M;
-  healthPots = 0;
+  healthPots = 1;
   
   level = 1;
   expe = 0;
@@ -132,7 +132,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
   mana = DEF_MANA * intel/8;
   gold = DEF_GOLD + (charisma - 8)*10;
 
-  healthPots = 0;
+  healthPots = 1;
   if (charisma > 15) {
     healthPots++;
   }

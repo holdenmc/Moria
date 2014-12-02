@@ -20,7 +20,7 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define DEF_HEIGHT_F 64
 #define DEF_WEIGHT_M 180
 #define DEF_WEIGHT_F 135
-#define DEF_GOLD 200
+#define DEF_GOLD 300
 #define DEF_MANA 50
 #define DEF_HEALTH 10
 #define NO_DEATH 0
