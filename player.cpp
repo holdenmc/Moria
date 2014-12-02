@@ -30,7 +30,7 @@ Player::Player() {
   healthPots = 0;
   
   level = 1;
-  exp = 0;
+  expe = 0;
   mana = DEF_MANA;
   gold = DEF_GOLD;
 
@@ -195,7 +195,7 @@ int Player::getLevel() {
 }
 
 int Player::getEXP() {
-  return exp;
+  return expe;
 }
 
 int Player::getGold() {
@@ -219,10 +219,11 @@ int Player::getMaxHealth() {
 }
 
 void Player::incrExp(int addedExp) {
-  exp += addedExp;
+  expe += addedExp;
 
   //Levels up every 100 points
-  if (exp >= level*LEVELEXP) {
+  if (expe >= LEVELEXP) {
+    expe = 0; //reset exp
     levelUp();
   }
 
@@ -330,10 +331,10 @@ void Player::levelUp() {
 }
 
 int Player::battleMonster(Monster* theMonster, bool playerFirst) {
-  cout << theMonster->getStr() - cons << endl << endl;
   if (playerFirst) {
     theMonster->hitForDamage(getStr());
     if (theMonster->getHealth() <= 0) {
+      incrExp(EXP_CONST);
       return MONSTER_DIE;
     }
 
@@ -351,6 +352,7 @@ int Player::battleMonster(Monster* theMonster, bool playerFirst) {
 
     theMonster->hitForDamage(getStr());
     if (theMonster->getHealth() <= 0) {
+      incrExp(EXP_CONST);
       return MONSTER_DIE;
     }
 

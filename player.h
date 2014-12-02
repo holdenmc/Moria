@@ -26,6 +26,7 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define NO_DEATH 0
 #define MONSTER_DIE 1
 #define PLAYER_DIE 2
+#define EXP_CONST 20
 
 #include <string>
 #include <vector>
@@ -84,7 +85,7 @@ class Player {
 
   private:
     int str, intel, health, dext, cons, charisma, age, height, weight, level,
-     exp, mana, gold, healthPots, max_health;
+     expe, mana, gold, healthPots, max_health;
     int base_str, base_intel, base_dext, base_cons, base_char;
     string name;
     char gender;
