@@ -10,6 +10,7 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #ifndef PLAYER_H
 #define PLAYER_H
 
+
 #define MALE 'm'
 #define FEMALE 'f'
 #define LEVELEXP 100
@@ -63,5 +64,6 @@ class Player {
     char gender;
     void LevelUp();
 };
+
 
 #endif

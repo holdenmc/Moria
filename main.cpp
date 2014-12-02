@@ -10,6 +10,7 @@ main.cpp - main function to control game operation
 #include <iostream>
 #include "player.h"
 #include "utils.h"
+#include "map.h"
 #include "town.h"
 #include "store.h"
 
