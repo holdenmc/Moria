@@ -66,7 +66,11 @@ class Dungeon: public Map {
     //space is empty, causes movement, etc.
     //similar to same method in Town but specialized for dungeons
     //difference: returns true if user opts to go back up stairs
+    //difference: lets monsters move IF the user moves
     bool performActionInDirection(char direction);
+    //similar to getStoreFromDoor in Town, checks w a s d direction and returns
+    //the monster in that immediate direction if it exists; NULL otherwise
+    Monster* getMonsterInDirection(char direction);
     //makes the next level of the dungeon - called when user finishes current
     //dungon - max 6 levels of dungeons
     //returns NULL if this is the 6th level of a dungeon

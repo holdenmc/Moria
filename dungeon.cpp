@@ -71,11 +71,15 @@ bool Dungeon::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow - 1][playerLocCol] == '>') { //next level
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
-
       nextLevel->deleteMonsters();
       delete(nextLevel);
     } else if (tiles[playerLocRow - 1][playerLocCol] == '<') { //prev level
       return true;
+    } else {
+      Monster* potentialMonster = getMonsterInDirection(direction);
+      if (potentialMonster != NULL) {
+        thePlayer->battleMonster(potentialMonster, true);
+      }
     }
   } else if (direction == 'a') {
     if (tiles[playerLocRow][playerLocCol - 1] == '.') {
@@ -85,11 +89,15 @@ bool Dungeon::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow][playerLocCol - 1] == '>') {
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
-
       nextLevel->deleteMonsters();
       delete(nextLevel);
     } else if (tiles[playerLocRow][playerLocCol - 1] == '<') {
       return true;
+    } else {
+      Monster* potentialMonster = getMonsterInDirection(direction);
+      if (potentialMonster != NULL) {
+        thePlayer->battleMonster(potentialMonster, true);
+      }
     }
   } else if (direction == 's') {
     if (tiles[playerLocRow + 1][playerLocCol] == '.') {
@@ -99,11 +107,15 @@ bool Dungeon::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow + 1][playerLocCol] == '>') {
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
-
       nextLevel->deleteMonsters();
       delete(nextLevel);
     } else if (tiles[playerLocRow + 1][playerLocCol] == '<') {
       return true;
+    } else {
+      Monster* potentialMonster = getMonsterInDirection(direction);
+      if (potentialMonster != NULL) {
+        thePlayer->battleMonster(potentialMonster, true);
+      }
     }
   } else if (direction == 'd') {
     if (tiles[playerLocRow][playerLocCol + 1] == '.') {
@@ -113,15 +125,55 @@ bool Dungeon::performActionInDirection(char direction) {
     } else if (tiles[playerLocRow][playerLocCol + 1] == '>') {
       Dungeon* nextLevel = next();
       nextLevel->enterDungeonLoop();
-
       nextLevel->deleteMonsters();
       delete(nextLevel);
     } else if (tiles[playerLocRow][playerLocCol + 1] == '<') {
       return true;
+    } else {
+      Monster* potentialMonster = getMonsterInDirection(direction);
+      if (potentialMonster != NULL) {
+        thePlayer->battleMonster(potentialMonster, true);
+      }
     }
   }
 
   return false;
+}
+
+Monster* Dungeon::getMonsterInDirection(char direction) {
+  if (direction == 'w') {
+    for (unsigned int i = 0; i < monsters.size(); i++) {
+      if (monsters[i]->row == playerLocRow - 1 
+          && monsters[i]->col == playerLocCol) {
+        return monsters[i];
+      }
+    }
+  } else if (direction == 'a') {
+    for (unsigned int i = 0; i < monsters.size(); i++) {
+      if (monsters[i]->row == playerLocRow
+          && monsters[i]->col == playerLocCol - 1) {
+        return monsters[i];
+      }
+    }
+  } else if (direction == 's') {
+    for (unsigned int i = 0; i < monsters.size(); i++) {
+      if (monsters[i]->row == playerLocRow + 1 
+          && monsters[i]->col == playerLocCol) {
+        return monsters[i];
+      }
+    }
+  } else if (direction == 'd') {
+    for (unsigned int i = 0; i < monsters.size(); i++) {
+      if (monsters[i]->row == playerLocRow
+          && monsters[i]->col == playerLocCol + 1) {
+        return monsters[i];
+      }
+    }
+  }
+  
+  //monster not found or input is not wasd, give null (although we expect our 
+  //program to only ever feed wasd to this function)
+  return NULL; 
 }
 
 Dungeon* Dungeon::next() {

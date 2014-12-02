@@ -59,7 +59,9 @@ class Monster {
       Walrus, Unicorn, SmallDragon, Dragon, MotherDragon, Balrog //bosses for each level
     };
     Monster(enum monsters theMonster);
-    int row, col; //location of monster in tiles[][]
+    //location of monster in tiles[][], publicly accessible since these are
+    //really dependent on the Map state, let the map have access to control this
+    int row, col; 
     char getName();
 
   private:

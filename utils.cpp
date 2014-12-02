@@ -69,7 +69,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
     vector<int> currPriceList = theStore->getPrices();
     vector<int> newPriceList;
     for (i = 0; i < currItemList.size(); i++) {
-      if (i != itemNum) {
+      if (i != (unsigned int)itemNum) {
         newItemList.push_back(currItemList.at(i));
         newPriceList.push_back(currPriceList.at(i));
       }
