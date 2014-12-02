@@ -43,20 +43,20 @@ Player* MakePlayer() {
   while (!done) {
     
     if (gender == 'm') {
-      str = rand() % 18 + 3;
-      intel = rand() % 20 + 1;
-      dext = rand() % 20 + 1;
-      cons = rand() % 18 + 3;
-      charisma = rand() % 20 + 1;
+      str = rand() % 5 + 4;
+      intel = rand() % 5 + 3;
+      dext = rand() % 5 + 3;
+      cons = rand() % 5 + 4;
+      charisma = rand() % 5 + 3;
       height = rand() % 20 + 68;
       weight = rand() % 100 + 180;
 
     } else {
-      str = rand() % 18 + 3;
-      intel = rand() % 20 + 1;
-      dext = rand() % 20 + 1;
-      cons = rand() % 20 + 1;
-      charisma = rand() % 18 + 3;
+      str = rand() % 5 + 3;
+      intel = rand() % 5 + 3;
+      dext = rand() % 5 + 4;
+      cons = rand() % 5 + 3;
+      charisma = rand() % 5 + 4;
       height = rand() % 20 + 62;
       weight = rand() % 50 + 140;
     }
@@ -118,14 +118,18 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   int inventorySize = thePlayer->getItems().size();
   
   Item currItem = currItemList.at(itemNum);
-  
+  int charisma = thePlayer->getChar();
 
   if (currGold < price) {
     return;
   } else if (inventorySize > 9) {
     return;
   } else {
-    thePlayer->changeGold(-1*price);
+    int priceReduce = 0;
+    if (charisma > 8) {
+      priceReduce = 2*(charisma - 8);
+    }
+    thePlayer->changeGold(-1*(price - priceReduce));
     thePlayer->addItem(currItem);
 
     //Removes the item from the store
