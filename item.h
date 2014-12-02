@@ -40,6 +40,8 @@ class Item {
     int getType();
     bool getEquip();
 
+    void setEquip(bool i_equipped);
+
     void equip(Player* thePlayer);
 
   private:

@@ -65,11 +65,14 @@ bool Item::getEquip() {
   return equipped;
 }
 
+void Item::setEquip(bool i_equipped) {
+  equipped = i_equipped;
+}
+
 void Item::equip(Player* thePlayer) {
 
   if (equipped == true) {
     equipped = false;
-    thePlayer->refreshStats();
     return;
   } 
 
@@ -81,19 +84,18 @@ void Item::equip(Player* thePlayer) {
     curr = list.at(i);
     
     if (curr.getType() == type) {
-      
       if (curr.getEquip()) {
-        curr.equip(thePlayer);
-        equipped = true;
-        thePlayer->refreshStats();
-        return;
+        if (name.compare(curr.getName()) != 0) {
+          curr.setEquip(false);
+          equipped = true;
+          return;
+        }
       }
     
     }
   } 
   if (equipped == false) {
     equipped = true;
-    thePlayer->refreshStats();
   }
 
   
