@@ -21,10 +21,10 @@ town.h - specific instance of a map, contains thed default shops that the player
 #define BUY_MENU_END_ROW   10
 #define BUY_MENU_END_COL   64
 #define MAX_ITEMS          10
-#define MENU_SPACING       2
-#define PRINTED_STRING_LEN 8
-#define PRICE_DIGITS       4
-#define COL_MAX            6
+#define MENU_SPACING       2 // Spacing constant
+#define PRINTED_STRING_LEN 8 //Length of the string displayed
+#define PRICE_DIGITS       4 //Number of digits displayed
+#define COL_MAX            6 //Max items in a column
 #define DUNGEON_ENT_ROW    2 //location of dungeon in any town instance
 #define DUNGEON_ENT_COL    32
 

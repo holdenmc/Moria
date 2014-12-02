@@ -17,7 +17,7 @@ utils.h - delcarations for general utility functions to assist in basic game
 
 
 //walks user through selection screen to make their player with statistics
-void MakePlayer(Player* thePlayer);
+Player* MakePlayer();
 
 //draws the screen given map and status bar
 void DrawGame(Map* theMap, Player* thePlayer);

@@ -22,7 +22,7 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define DEF_WEIGHT_F 135
 #define DEF_GOLD 200
 #define DEF_MANA 50
-#define DEF_HEALTH 20
+#define DEF_HEALTH 10
 
 #include <string>
 #include <vector>
@@ -33,7 +33,7 @@ class Item;
 class Player {
   public:
     Player();
-    Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons, 
+    Player(int i_str, int i_intel, int i_dext, int i_cons, 
         int i_charisma, int i_age, int i_height, int i_weight,
         string i_name, char i_gender);
 
@@ -53,6 +53,8 @@ class Player {
     int getGold();
     int getMana();
     vector<Item> getItems();
+    int getHealthPots();
+    int getMaxHealth();
 
 
     void incrExp(int addedExp);
@@ -61,12 +63,14 @@ class Player {
     void addItem(Item newItem);
     void removeItem(string removeName);
     void refreshStats();
+    void drinkHealthPot();
 
 
 
   private:
     int str, intel, health, dext, cons, charisma, age, height, weight, level,
-     exp, mana, gold;
+     exp, mana, gold, healthPots, max_health;
+    int base_str, base_intel, base_dext, base_cons, base_char;
     string name;
     char gender;
     vector<Item> items;

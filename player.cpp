@@ -19,22 +19,29 @@ Player::Player() {
   gender = 'm';
   str = DEF_STAT;
   intel = DEF_STAT;
-  health = DEF_HEALTH;
+  health = DEF_HEALTH + 2*DEF_STAT;
   dext = DEF_STAT;
   cons = DEF_STAT;
   charisma = DEF_STAT;
   age = DEF_AGE;
   height = DEF_HEIGHT_M;
   weight = DEF_WEIGHT_M;
+  healthPots = 0;
   
   level = 1;
   exp = 0;
   mana = DEF_MANA;
   gold = DEF_GOLD;
 
+  base_str = str; 
+  base_intel = intel; 
+  base_dext = dext; 
+  base_cons = cons; 
+  base_char = charisma;
+
 }
 
-Player::Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons, 
+Player::Player(int i_str, int i_intel, int i_dext, int i_cons, 
         int i_charisma, int i_age, int i_height, int i_weight,
         string i_name, char i_gender) {
   name = i_name;
@@ -63,14 +70,7 @@ Player::Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons,
     intel = DEF_STAT;
   }
 
-  if(health < 20) {
-    health = i_height;
-  } else {
-    cout << "CHOSE AN INVALID HEALTH";
-    //Goes to default
-    health = DEF_HEALTH;
-  }
-
+  
   if(i_dext <= 20 && i_dext > 0) {
     dext = i_dext;
   } else {
@@ -86,6 +86,9 @@ Player::Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons,
     //Goes to default
     cons = DEF_STAT;
   }
+
+  health = 2*cons + DEF_HEALTH; //Health is a calculated field
+  max_health = health;
 
   if(i_charisma <= 20 && i_charisma > 0) {
     charisma = i_charisma;
@@ -122,6 +125,13 @@ Player::Player(int i_str, int i_intel, int i_health, int i_dext, int i_cons,
       height = DEF_HEIGHT_F;
     }
   }
+
+  healthPots = 0;
+  base_str = str; 
+  base_intel = intel; 
+  base_dext = dext; 
+  base_cons = cons; 
+  base_char = charisma;
 
 }
 
@@ -190,6 +200,14 @@ vector<Item> Player::getItems() {
   return items;
 }
 
+int Player::getHealthPots() {
+  return healthPots;
+}
+
+int Player::getMaxHealth() {
+  return max_health;
+}
+
 void Player::incrExp(int addedExp) {
   exp += addedExp;
 
@@ -215,18 +233,71 @@ void Player::addItem(Item newItem) {
 
 void Player::removeItem(string removeName) {
   unsigned int i;
+  vector<Item> newItemList;
   for (i = 0; i < items.size(); i++) {
-    if (removeName.compare(items.at(i).getName()) == 0) {
-      break;
+    if (removeName.compare(items.at(i).getName()) != 0) {
+      newItemList.push_back(items.at(i));
     }
   }
+  items = newItemList;
 
+}
 
+void Player::drinkHealthPot() {
+  if (healthPots > 0) {
+    health += 10;
+    if (health > max_health) {
+      health = max_health;
+    }
+    healthPots--;
+  }
 }
 
 void Player::refreshStats() {
 
-  //TODO: Updates a players stats based on whether an item was equipped
+  int str_boost = 0;
+  int int_boost = 0;
+  int cons_boost = 0;
+  int char_boost = 0;
+  int dext_boost = 0;
+
+  for (int i = 0; i < items.size(); i++) {
+    if (items.at(i).getEquip()) {
+      switch(items.at(i).getIndicator()) {
+
+        /*indicators
+        1 - str
+        2 - intel
+        3 - dext 
+        4 - cons 
+        5 -charisma */
+
+        case 1: str_boost += items.at(i).getBoost();
+                break;
+
+        case 2: int_boost += items.at(i).getBoost();
+                break;
+
+        case 3: dext_boost += items.at(i).getBoost();
+                break;
+
+        case 4: cons_boost += items.at(i).getBoost();
+                break;
+
+        case 5: char_boost += items.at(i).getBoost();
+                break;
+
+      }
+    }
+  }
+
+  str = base_str + str_boost;
+  intel = base_intel + int_boost;
+  cons = base_cons + cons_boost;
+  charisma = base_char + char_boost;
+  dext = base_dext + dext_boost;
+  max_health = DEF_HEALTH + cons*2;
+
 
 }
 

@@ -7,10 +7,9 @@ item.h - controls the items class and everything to do with them
 indicators
 1 - str
 2 - intel
-3 - wisd 
-4 - dext 
-5 - cons 
-6 -charisma
+3 - dext 
+4 - cons 
+5 -charisma
 
 types
 1 - weapon

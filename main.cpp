@@ -19,8 +19,7 @@ main.cpp - main function to control game operation
 using namespace std;
 
 int main() {
-  Player* thePlayer = new Player();
-  MakePlayer(thePlayer);
+  Player* thePlayer = MakePlayer();
 
 
   //make default stores for town... TODO move this into function in utils?

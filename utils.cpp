@@ -14,8 +14,13 @@ utils.h - implementation for utils.h
 
 using namespace std;
 
-void MakePlayer(Player* thePlayer) {
-  
+Player* MakePlayer() {
+  //Function to create a player with random attributes
+  Player* result;
+
+
+  result = new Player();
+  return result;
 }
 
 void DrawGame(Map* theMap, Player* thePlayer) {
@@ -24,8 +29,9 @@ void DrawGame(Map* theMap, Player* thePlayer) {
     << thePlayer->getStr() << "HP:" << setw(8) << thePlayer->getHealth() 
     << "CON:" << setw(7) << thePlayer->getCons() << "LEV:" << setw(7) 
     << thePlayer->getLevel() << "MANA:" << setw(7) << thePlayer->getMana() 
-    << endl << setw(11) << thePlayer->getGender() << "INT:" << setw(7) 
-    << thePlayer->getIntel() << "DEX:" << setw(7) << thePlayer->getDext() 
+    << endl << "HPots:" << setw(7) << thePlayer->getHealthPots() << "INT:" 
+    << setw(7) << thePlayer->getIntel() << "DEX:" << setw(7) 
+    << thePlayer->getDext() 
     << "CHA:" << setw(7) << thePlayer->getChar() << "EXP:" << setw(7) 
     << thePlayer->getEXP() << "GOLD:" << setw(7) << thePlayer->getGold() << endl;
 
@@ -33,7 +39,8 @@ void DrawGame(Map* theMap, Player* thePlayer) {
 }
 
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
-  
+  //TODO: WRITE THIS STUFF
+
 }
 
 string toString(int number) {
