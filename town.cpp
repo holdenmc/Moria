@@ -27,12 +27,17 @@ Town::Town (vector<Store*> *stores, Player* thePlayer) {
 }
 
 bool Town::performTownAction(char input) {
-  if (input == 'q') {
-    return true;
-  } else if (input == 'i') {
-    handleInventory();
-  } else {
-    performActionInDirection(input);
+  switch(input) {
+    case 'q': return true;
+
+    case 'i': handleInventory();
+
+    case 'h': thePlayer->drinkHealthPot();
+
+    case 'w':
+    case 'a':
+    case 's':
+    case 'd': performActionInDirection(input);
   }
 
   return false;

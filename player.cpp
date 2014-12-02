@@ -38,6 +38,7 @@ Player::Player() {
   base_dext = dext; 
   base_cons = cons; 
   base_char = charisma;
+  max_health = health;
 
 }
 
@@ -248,6 +249,10 @@ void Player::removeItem(string removeName) {
 }
 
 void Player::drinkHealthPot() {
+  if (health == max_health) {
+    return;
+  }
+
   if (healthPots > 0) {
     health += 10;
     if (health > max_health) {
@@ -255,6 +260,10 @@ void Player::drinkHealthPot() {
     }
     healthPots--;
   }
+}
+
+void Player::setHealthPot(int numPots) {
+  healthPots = numPots;
 }
 
 void Player::refreshStats() {

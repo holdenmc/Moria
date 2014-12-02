@@ -20,6 +20,7 @@ using namespace std;
 
 int main() {
   Player* thePlayer = MakePlayer();
+  thePlayer->setHealthPot(2);
 
 
   //make default stores for town... TODO move this into function in utils?
@@ -33,7 +34,7 @@ int main() {
   
   vector<int> prices;
   prices.push_back(100);
-  prices.push_back(200);
+  prices.push_back(50);
 
 
   Store* general = new Store(STORE_SIZE, STORE_SIZE, STORE_SIZE, STORE_SIZE,

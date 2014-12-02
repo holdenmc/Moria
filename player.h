@@ -65,6 +65,7 @@ class Player {
     void refreshStats();
     void drinkHealthPot();
     void setItems(vector<Item> currItemList);
+    void setHealthPot(int numPots);
 
 
 
