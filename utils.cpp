@@ -47,8 +47,8 @@ Player* MakePlayer() {
     if (gender == 'm') {
       str = rand() % 5 + 4;
       intel = rand() % 5 + 3;
-      dext = rand() % 5 + 3;
-      cons = rand() % 5 + 4;
+      dext = rand() % 3 + 3;
+      cons = rand() % 3 + 7;
       charisma = rand() % 5 + 3;
       height = rand() % 20 + 68;
       weight = rand() % 100 + 180;
@@ -56,8 +56,8 @@ Player* MakePlayer() {
     } else {
       str = rand() % 5 + 3;
       intel = rand() % 5 + 3;
-      dext = rand() % 5 + 4;
-      cons = rand() % 5 + 3;
+      dext = rand() % 4 + 5;
+      cons = rand() % 3 + 4;
       charisma = rand() % 5 + 4;
       height = rand() % 20 + 62;
       weight = rand() % 50 + 140;
