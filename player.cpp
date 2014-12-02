@@ -8,6 +8,8 @@ player.cpp - implementations for player.h
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <time.h>
+#include <cstdlib>
 #include "player.h"
 #include "item.h"
 #include "monster.h"
@@ -331,6 +333,7 @@ void Player::levelUp() {
 }
 
 int Player::battleMonster(Monster* theMonster, bool playerFirst) {
+  srand(time(NULL));
   if (playerFirst) {
     theMonster->hitForDamage(getStr());
     if (theMonster->getHealth() <= 0) {
@@ -338,16 +341,22 @@ int Player::battleMonster(Monster* theMonster, bool playerFirst) {
       return MONSTER_DIE;
     }
 
-    hitForDamage(theMonster->getStr());
-    if (health <= 0) {
-      return PLAYER_DIE;
+    int random = rand() % MISS_RANGE; // dex is % chance of enemy missing
+    if (random < MISS_RANGE - dext) {
+      hitForDamage(theMonster->getStr());
+      if (health <= 0) {
+        return PLAYER_DIE;
+      }
     }
 
     return NO_DEATH;
   } else {
-    hitForDamage(theMonster->getStr());
-    if (health <= 0) {
-      return PLAYER_DIE;
+    int random = rand() % MISS_RANGE; // dex is % chance of enemy missing
+    if (random < MISS_RANGE - dext) {
+      hitForDamage(theMonster->getStr());
+      if (health <= 0) {
+        return PLAYER_DIE;
+      }
     }
 
     theMonster->hitForDamage(getStr());

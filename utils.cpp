@@ -9,6 +9,8 @@ utils.h - implementation for utils.h
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <time.h>
+#include <cstdlib>
 #include "utils.h"
 
 
@@ -41,7 +43,7 @@ Player* MakePlayer() {
   }
 
   while (!done) {
-    
+    srand(time(NULL));
     if (gender == 'm') {
       str = rand() % 5 + 4;
       intel = rand() % 5 + 3;
@@ -61,10 +63,11 @@ Player* MakePlayer() {
       weight = rand() % 50 + 140;
     }
 
-    cout << setw(11) << left << name << "STR:" << setw(7) << str <<  "CON:" 
+    cout <<endl << setw(11) << left << name << "STR:" << setw(7) << str <<"CON:" 
     << setw(7) << cons << "INT:" << setw(7) << intel << "DEX:" << setw(7) 
-    << dext << "CHA:" << setw(7) << charisma << endl << "Height:" << setw(7) 
-    << height << "Weight:" << setw(7) << weight << endl;
+    << dext << "CHA:" << setw(7) << charisma << endl << setw(18) << right
+    << "Height:" << left << setw(4) << height << "Weight:" << setw(7) << weight 
+    << endl;
 
     cout << endl << "Hit r to reroll.  Hit d to finish" << endl;
 

@@ -26,7 +26,8 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define NO_DEATH 0
 #define MONSTER_DIE 1
 #define PLAYER_DIE 2
-#define EXP_CONST 20
+#define EXP_CONST 10
+#define MISS_RANGE 100
 
 #include <string>
 #include <vector>
