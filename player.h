@@ -87,7 +87,7 @@ class Player {
   private:
     int str, intel, health, dext, cons, charisma, age, height, weight, level,
      expe, mana, gold, healthPots, max_health;
-    int base_str, base_intel, base_dext, base_cons, base_char;
+    int base_str, base_intel, base_dext, base_cons, base_char, base_health;
     string name;
     char gender;
     vector<Item> items;

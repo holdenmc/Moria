@@ -42,6 +42,7 @@ Player::Player() {
   base_cons = cons; 
   base_char = charisma;
   max_health = health;
+  base_health = DEF_HEALTH;
 
 }
 
@@ -93,6 +94,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
 
   health = 2*cons + DEF_HEALTH; //Health is a calculated field
   max_health = health;
+  base_health = DEF_HEALTH;
 
   if(i_charisma <= 20 && i_charisma > 0) {
     charisma = i_charisma;
@@ -321,12 +323,13 @@ void Player::refreshStats() {
   cons = base_cons + cons_boost;
   charisma = base_char + char_boost;
   dext = base_dext + dext_boost;
-  max_health = DEF_HEALTH + cons*2;
+  max_health = base_health + cons*2;
 
 
 }
 
 void Player::levelUp() {
+  base_health++;
   health++;
 
   cout << "Level up: choose what stat you would like to increase by 1:" << endl

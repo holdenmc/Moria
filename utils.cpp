@@ -135,7 +135,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
     thePlayer->changeGold(-1*(price - priceReduce));
     
     if (theStore->getDoor() == 'g') {
-      thePlayer->setHealthPots(1 + thePlayer->getHealthPots());
+      thePlayer->setHealthPot(1 + thePlayer->getHealthPots());
       return;
     }
 
