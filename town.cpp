@@ -173,7 +173,7 @@ void Town::enterBuyMenu(Store theStore) {
 }
 
 void Town::updateTilesForBuyMenu(Store* theStore) {
-  int i, j, itemNum;
+  unsigned int i, j, itemNum;
   string currString;
   char currentChar = '0';
   vector<string> items = theStore->getItems();
@@ -195,7 +195,6 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   }
 
   //Iterates the first column of items
-   
   for (itemNum = 0; itemNum < COL_MAX && itemNum < items.size(); itemNum++) {
     i = BUY_MENU_START_COL + MENU_SPACING;
     j = 0;
@@ -236,6 +235,5 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
       tiles[BUY_MENU_START_ROW + itemNum - COL_MAX + MENU_SPACING][i+j] 
         = currentChar;
     }
-
   }
 }
