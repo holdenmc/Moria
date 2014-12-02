@@ -321,11 +321,37 @@ void Player::levelUp() {
   //to upgrade
 }
 
-void Player::battleMonster(Monster* theMonster, bool playerFirst) {
-  //TODO
+int Player::battleMonster(Monster* theMonster, bool playerFirst) {
+  cout << theMonster->getStr() - cons << endl << endl;
   if (playerFirst) {
-    cout << "HELP " << endl << endl;
+    theMonster->hitForDamage(getStr());
+    if (theMonster->getHealth() <= 0) {
+      return MONSTER_DIE;
+    }
+
+    hitForDamage(theMonster->getStr());
+    if (health <= 0) {
+      return PLAYER_DIE;
+    }
+
+    return NO_DEATH;
   } else {
-    cout << "DIE " << endl << endl;
+    hitForDamage(theMonster->getStr());
+    if (health <= 0) {
+      return PLAYER_DIE;
+    }
+
+    theMonster->hitForDamage(getStr());
+    if (theMonster->getHealth() <= 0) {
+      return MONSTER_DIE;
+    }
+
+    return NO_DEATH;
+  }
+}
+
+void Player::hitForDamage(int dmg) {
+  if (dmg - cons > 0) {
+    health-= (dmg - cons);
   }
 }

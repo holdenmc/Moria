@@ -51,7 +51,7 @@ bool Dungeon::performDungeonAction(char input) {
     return false;
   } else if (input == 'Q') {
     cout << "You lose. Goodbye." << endl;
-    return true;
+    exit(1);
   }
 
   return performActionInDirection(input);
@@ -67,7 +67,11 @@ void Dungeon::deleteMonsters() {
 bool Dungeon::performActionInDirection(char direction) {
   if (direction == 'w') {
     //check for empty space...
-    if (tiles[playerLocRow - 1][playerLocCol] == '.') {
+    if (tiles[playerLocRow - 1][playerLocCol] == '.' 
+        || tiles[playerLocRow - 1][playerLocCol] == '$') {
+      if (tiles[playerLocRow - 1][playerLocCol] == '$') {
+        thePlayer->changeGold(GOLD_CONST);
+      }
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocRow--;
       tiles[playerLocRow][playerLocCol] = 'p';
@@ -82,11 +86,16 @@ bool Dungeon::performActionInDirection(char direction) {
     } else {
       Monster* potentialMonster = getMonsterInDirection(direction);
       if (potentialMonster != NULL) {
-        thePlayer->battleMonster(potentialMonster, true);
+        processBattleResult(thePlayer->battleMonster(potentialMonster, true), 
+          potentialMonster);
       }
     }
   } else if (direction == 'a') {
-    if (tiles[playerLocRow][playerLocCol - 1] == '.') {
+    if (tiles[playerLocRow][playerLocCol - 1] == '.'
+        || tiles[playerLocRow][playerLocCol - 1] == '$') {
+      if (tiles[playerLocRow][playerLocCol - 1] == '$') {
+        thePlayer->changeGold(GOLD_CONST);
+      }
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocCol--;
       tiles[playerLocRow][playerLocCol] = 'p';
@@ -101,11 +110,16 @@ bool Dungeon::performActionInDirection(char direction) {
     } else {
       Monster* potentialMonster = getMonsterInDirection(direction);
       if (potentialMonster != NULL) {
-        thePlayer->battleMonster(potentialMonster, true);
+        processBattleResult(thePlayer->battleMonster(potentialMonster, true), 
+          potentialMonster);
       }
     }
   } else if (direction == 's') {
-    if (tiles[playerLocRow + 1][playerLocCol] == '.') {
+    if (tiles[playerLocRow + 1][playerLocCol] == '.'
+        || tiles[playerLocRow + 1][playerLocCol] == '$') {
+      if (tiles[playerLocRow + 1][playerLocCol] == '$') {
+        thePlayer->changeGold(GOLD_CONST);
+      }
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocRow++;
       tiles[playerLocRow][playerLocCol] = 'p';
@@ -120,11 +134,16 @@ bool Dungeon::performActionInDirection(char direction) {
     } else {
       Monster* potentialMonster = getMonsterInDirection(direction);
       if (potentialMonster != NULL) {
-        thePlayer->battleMonster(potentialMonster, true);
+        processBattleResult(thePlayer->battleMonster(potentialMonster, true), 
+          potentialMonster);
       }
     }
   } else if (direction == 'd') {
-    if (tiles[playerLocRow][playerLocCol + 1] == '.') {
+    if (tiles[playerLocRow][playerLocCol + 1] == '.'
+        || tiles[playerLocRow][playerLocCol + 1] == '$') {
+      if (tiles[playerLocRow][playerLocCol + 1] == '$') {
+        thePlayer->changeGold(GOLD_CONST);
+      }
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocCol++;
       tiles[playerLocRow][playerLocCol] = 'p';
@@ -139,7 +158,8 @@ bool Dungeon::performActionInDirection(char direction) {
     } else {
       Monster* potentialMonster = getMonsterInDirection(direction);
       if (potentialMonster != NULL) {
-        thePlayer->battleMonster(potentialMonster, true);
+        processBattleResult(thePlayer->battleMonster(potentialMonster, true), 
+          potentialMonster);
       }
     }
   }
@@ -192,7 +212,8 @@ void Dungeon::moveMonsters() {
           || tiles[theMonster->row - 1][theMonster->col] == '#'
           || tiles[theMonster->row - 1][theMonster->col] == 'p')) {
       if (tiles[theMonster->row - 1][theMonster->col] == 'p') {
-        thePlayer->battleMonster(theMonster, false);
+        processBattleResult(thePlayer->battleMonster(theMonster, false), 
+          theMonster);
       } else {
         tiles[theMonster->row][theMonster->col] = '.';
         theMonster->row--;
@@ -203,7 +224,8 @@ void Dungeon::moveMonsters() {
           || tiles[theMonster->row + 1][theMonster->col] == '#'
           || tiles[theMonster->row + 1][theMonster->col] == 'p')) {
       if (tiles[theMonster->row + 1][theMonster->col] == 'p') {
-        thePlayer->battleMonster(theMonster, false);
+        processBattleResult(thePlayer->battleMonster(theMonster, false), 
+          theMonster);
       } else {
         tiles[theMonster->row][theMonster->col] = '.';
         theMonster->row++;
@@ -214,7 +236,8 @@ void Dungeon::moveMonsters() {
           || tiles[theMonster->row][theMonster->col - 1] == '#'
           || tiles[theMonster->row][theMonster->col - 1] == 'p')) {
       if (tiles[theMonster->row][theMonster->col - 1] == 'p') {
-        thePlayer->battleMonster(theMonster, false);
+        processBattleResult(thePlayer->battleMonster(theMonster, false), 
+          theMonster);
       } else {
         tiles[theMonster->row][theMonster->col] = '.';
         theMonster->col--;
@@ -225,7 +248,8 @@ void Dungeon::moveMonsters() {
           || tiles[theMonster->row][theMonster->col + 1] == '#'
           || tiles[theMonster->row][theMonster->col + 1] == 'p')) {
       if (tiles[theMonster->row][theMonster->col + 1] == 'p') {
-        thePlayer->battleMonster(theMonster, false);
+        processBattleResult(thePlayer->battleMonster(theMonster, false), 
+          theMonster);
       } else {
         tiles[theMonster->row][theMonster->col] = '.';
         theMonster->col++;
@@ -434,4 +458,29 @@ void Dungeon::spawnBoss() {
   tiles[row][col] = theMonster->getName();
 
   monsters.push_back(theMonster);
+}
+
+void Dungeon::processBattleResult(int code, Monster* theMonster) {
+  //do nothing special besides print updated screen for code == 0
+  if (code == MONSTER_DIE) {
+    tiles[theMonster->row][theMonster->col] = '$'; //drop 50 gold
+    int i = 0;
+    while ( *(monsters.begin() + i) != theMonster) {
+      i++;
+    }
+    monsters.erase(monsters.begin() + i);
+    delete(theMonster);
+    if (monsters.empty()) {
+      //remove rocks that were spawned around stairs to allow access to next
+      tiles[PLAYER_START_ROW][COLS - 3] = '.';
+      tiles[PLAYER_START_ROW - 1][COLS - 3] = '.';
+      tiles[PLAYER_START_ROW - 1][COLS - 2] = '.';
+      tiles[PLAYER_START_ROW + 1][COLS - 3] = '.';
+      tiles[PLAYER_START_ROW + 1][COLS - 2] = '.';
+    }
+  } else if (code == PLAYER_DIE) {
+    tiles[playerLocRow][playerLocCol] = '@'; //player died here
+    cout << "You died. You lose. Goodbye." << endl;
+    exit(0);
+  }
 }

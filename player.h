@@ -23,6 +23,9 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 #define DEF_GOLD 200
 #define DEF_MANA 50
 #define DEF_HEALTH 10
+#define NO_DEATH 0
+#define MONSTER_DIE 1
+#define PLAYER_DIE 2
 
 #include <string>
 #include <vector>
@@ -71,7 +74,11 @@ class Player {
     //to be called when the player is neighboring a monster in a dungeon;
     //allows player to attack monster first and then monster attack back
     //if playerFirst = true; vice versa for false
-    void battleMonster(Monster* theMonster, bool playerFirst);
+    //returns 0 if neither monster nor player died, 1 if monster died, 2 if
+    //player died
+    int battleMonster(Monster* theMonster, bool playerFirst);
+    //based on player cons, deals damage if any damage is dealt to player
+    void hitForDamage(int dmg);
 
 
 
