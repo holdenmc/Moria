@@ -13,6 +13,7 @@ map.h - general 66 by 22 grid of characters to represent the game's status,
 
 #define ROWS 20
 #define COLS 66
+#define PLAYER_START 1
 
 class Map {
   public:

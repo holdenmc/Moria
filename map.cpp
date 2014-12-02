@@ -34,7 +34,7 @@ Map::Map () {
     tiles[i][COLS - 1] = '#';
   }
 
-  playerLocRow = playerLocCol = 1; //default player location row 1 col 1
+  playerLocRow = playerLocCol = PLAYER_START; //default player @ row 1 col 1
   tiles[playerLocRow][playerLocCol] = 'p';
 }
 
