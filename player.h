@@ -25,8 +25,9 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 
 #include <string>
 
-using namespace std;
 
+using namespace std;
+class Item;
 class Player {
   public:
     Player();
@@ -49,11 +50,15 @@ class Player {
     int getEXP();
     int getGold();
     int getMana();
+    vector<Item> getItems();
 
 
     void incrExp(int addedExp);
     void changeMana(int manaChange);
     void changeGold(int moneyChange);
+    void addItem(Item newItem);
+    void removeItem(string removeName);
+    void refreshStats();
 
 
 
@@ -62,6 +67,7 @@ class Player {
      exp, mana, gold;
     string name;
     char gender;
+    vector<Item> items;
     void LevelUp();
 };
 
