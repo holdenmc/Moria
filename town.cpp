@@ -10,8 +10,10 @@ town.cpp - implementation for town.h
 #include <string>
 #include "utils.h"
 #include "player.h"
+#include "map.h"
 #include "town.h"
 #include "store.h"
+#include "dungeon.h"
 
 Town::Town (vector<Store*> *stores, Player* thePlayer) {
   this->stores = stores;
@@ -21,6 +23,7 @@ Town::Town (vector<Store*> *stores, Player* thePlayer) {
   }
 
   this->thePlayer = thePlayer;
+  tiles[DUNGEON_ENT_ROW][DUNGEON_ENT_COL] = '>';
 }
 
 bool Town::performTownAction(char input) {
@@ -51,6 +54,9 @@ void Town::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocRow--;
       tiles[playerLocRow][playerLocCol] = 'p';
+    } else if (tiles[playerLocRow - 1][playerLocCol] == '>') { //enter dungeon
+      Dungeon* firstDungeon = new Dungeon(thePlayer);
+      firstDungeon->enterDungeonLoop();
     } else if (tiles[playerLocRow - 1][playerLocCol] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow-1][playerLocCol]);
       if (possStore != NULL) {
@@ -62,6 +68,9 @@ void Town::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocCol--;
       tiles[playerLocRow][playerLocCol] = 'p';
+    } else if (tiles[playerLocRow][playerLocCol - 1] == '>') {
+      Dungeon* firstDungeon = new Dungeon(thePlayer);
+      firstDungeon->enterDungeonLoop();
     } else if (tiles[playerLocRow][playerLocCol - 1] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow][playerLocCol-1]);
       if (possStore != NULL) {
@@ -73,6 +82,9 @@ void Town::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocRow++;
       tiles[playerLocRow][playerLocCol] = 'p';
+    } else if (tiles[playerLocRow + 1][playerLocCol] == '>') {
+      Dungeon* firstDungeon = new Dungeon(thePlayer);
+      firstDungeon->enterDungeonLoop();
     } else if (tiles[playerLocRow + 1][playerLocCol] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow+1][playerLocCol]);
       if (possStore != NULL) {
@@ -84,6 +96,9 @@ void Town::performActionInDirection(char direction) {
       tiles[playerLocRow][playerLocCol] = '.';
       playerLocCol++;
       tiles[playerLocRow][playerLocCol] = 'p';
+    } else if (tiles[playerLocRow][playerLocCol + 1] == '>') {
+      Dungeon* firstDungeon = new Dungeon(thePlayer);
+      firstDungeon->enterDungeonLoop();
     } else if (tiles[playerLocRow][playerLocCol + 1] != '#') {
       Store* possStore = getStoreFromDoor(tiles[playerLocRow][playerLocCol+1]);
       if (possStore != NULL) {
@@ -186,6 +201,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     i++;
   }
 
+
   //Write the numbers for the items
   currentChar = '0';
   i = BUY_MENU_START_ROW + MENU_SPACING;
@@ -201,7 +217,6 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
   }
 
   //Iterates the first column of items 
-
   for (itemNum = 0; itemNum < COL_MAX && itemNum < items.size(); itemNum++) {
     i = BUY_MENU_START_COL + MENU_SPACING;
     j = 0;
@@ -244,5 +259,4 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
     }
 
   }
-
 }

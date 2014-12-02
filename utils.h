@@ -19,7 +19,7 @@ utils.h - delcarations for general utility functions to assist in basic game
 void MakePlayer(Player* thePlayer);
 
 //draws the screen given map and status bar
-void DrawGame(Town* theMap, Player* thePlayer);
+void DrawGame(Map* theMap, Player* thePlayer);
 
 //Transfers an item from the store to the player
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer);

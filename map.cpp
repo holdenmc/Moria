@@ -7,10 +7,13 @@ map.cpp - implementation for map.h
 
 #include <iostream>
 #include "map.h"
+#include "player.h"
 
 using namespace std;
 
 Map::Map () {
+  thePlayer = new Player(); //defaults to default player 'john snow'
+
   int i, j;
   i = j = 0;
 

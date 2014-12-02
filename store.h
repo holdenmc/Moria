@@ -8,6 +8,7 @@ store.h - contains information for a store that exists in the town
 #ifndef STORE_H
 #define STORE_H
 
+
 #include <vector>
 #include <string>
 

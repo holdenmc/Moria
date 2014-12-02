@@ -9,6 +9,8 @@ map.h - general 66 by 22 grid of characters to represent the game's status,
 #define MAP_H
 
 
+#include "player.h"
+
 #define ROWS 20
 #define COLS 66
 
@@ -21,7 +23,10 @@ class Map {
 
   protected:
     char tiles[ROWS][COLS];
-    int playerLocRow, playerLocCol; //track the one player on the map
+    //track the one player on the map
+    int playerLocRow, playerLocCol; 
+    //the player in the town...
+    Player* thePlayer;
 
   private:
     
