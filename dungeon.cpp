@@ -46,7 +46,7 @@ void Dungeon::enterDungeonLoop() {
 
 bool Dungeon::performDungeonAction(char input) {
   //add in specific user commands besides movement here if necessary
-  if (input == 'p') {
+  if (input == 'h') {
     thePlayer->drinkHealthPot();
     return false;
   } else if (input == 'Q') {
@@ -206,7 +206,6 @@ Monster* Dungeon::getMonsterInDirection(char direction) {
 void Dungeon::moveMonsters() {
   for (unsigned int i = 0; i < monsters.size(); i++) {
     Monster* theMonster = monsters[i];
-    //move up/down
     if (theMonster->row > playerLocRow 
         && (tiles[theMonster->row - 1][theMonster->col] == '.'
           || tiles[theMonster->row - 1][theMonster->col] == '#'
@@ -231,7 +230,9 @@ void Dungeon::moveMonsters() {
         theMonster->row++;
         tiles[theMonster->row][theMonster->col] = theMonster->getName();
       }
-    } else if (theMonster->col > playerLocCol 
+    }
+
+    if (theMonster->col > playerLocCol 
         && (tiles[theMonster->row][theMonster->col - 1] == '.'
           || tiles[theMonster->row][theMonster->col - 1] == '#'
           || tiles[theMonster->row][theMonster->col - 1] == 'p')) {
@@ -320,13 +321,17 @@ void Dungeon::setupDungeon() {
   
   //place stairs 'up' and 'down'
   tiles[PLAYER_START_ROW][PLAYER_START_COL - 1] = '<';
-  tiles[PLAYER_START_ROW][COLS - 2] = '>';
-  
-  //rocks in place, carve straight path in unlikely event stairs not reachable
-  i = PLAYER_START_COL + 1;
-  while (tiles[PLAYER_START_ROW][i] != '>') {
-    tiles[PLAYER_START_ROW][i] = '.';
-    i++;
+
+  //setup down stairs only when levels 1 through 5
+  if (level < 6) {
+    tiles[PLAYER_START_ROW][COLS - 2] = '>';
+    
+    //rocks in place, carve straight path in unlikely event stairs not reachable
+    i = PLAYER_START_COL + 1;
+    while (tiles[PLAYER_START_ROW][i] != '>') {
+      tiles[PLAYER_START_ROW][i] = '.';
+      i++;
+    }
   }
 }
 

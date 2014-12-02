@@ -75,7 +75,7 @@ class Dungeon: public Map {
     //to be called if user moves to empty space '.'; takes every monster
     //except boss and moves it towards the player or attacks if directly 
     //neighboring the player
-    // -> monsters break through rocks :)
+    // -> monsters break through rocks :) and move diagonally a lot :)
     void moveMonsters();
     //makes the next level of the dungeon - called when user finishes current
     //dungon - max 6 levels of dungeons
