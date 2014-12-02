@@ -133,6 +133,12 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
       priceReduce = 2*(charisma - 8);
     }
     thePlayer->changeGold(-1*(price - priceReduce));
+    
+    if (theStore->getDoor() == 'g') {
+      thePlayer->setHealthPots(1 + thePlayer->getHealthPots());
+      return;
+    }
+
     thePlayer->addItem(currItem);
 
     //Removes the item from the store
