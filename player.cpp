@@ -213,6 +213,7 @@ void Player::addItem(Item newItem) {
 
 
 void Player::removeItem(string removeName) {
+  //Doesn't do anything yet
   int i;
   for (i = 0; i < items.size(); i++) {
     if (removeName.compare(items.at(i).getName()) == 0) {
@@ -220,7 +221,7 @@ void Player::removeItem(string removeName) {
     }
   }
 
-  
+
 }
 
 void Player::refreshStats() {
