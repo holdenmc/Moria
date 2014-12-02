@@ -185,6 +185,10 @@ int Player::getMana() {
   return mana;
 }
 
+vector<Item> Player::getItems() {
+  return items;
+}
+
 void Player::incrExp(int addedExp) {
   exp += addedExp;
 
@@ -201,6 +205,28 @@ void Player::changeMana(int manaChange) {
 
 void Player::changeGold(int moneyChange) {
   gold += moneyChange;
+}
+
+void Player::addItem(Item newItem) {
+  items.push_back(newItem);
+}
+
+
+void Player::removeItem(string removeName) {
+  int i;
+  for (i = 0; i < items.size(); i++) {
+    if (removeName.compare(items.at(i).getName()) == 0) {
+      break;
+    }
+  }
+
+  
+}
+
+void Player::refreshStats() {
+
+  //TODO: Updates a players stats based on whether an item was equipped
+
 }
 
 void Player::LevelUp() {

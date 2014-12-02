@@ -9,8 +9,8 @@ utils.h - implementation for utils.h
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "player.h"
-#include "town.h"
+#include "utils.h"
+
 
 using namespace std;
 
