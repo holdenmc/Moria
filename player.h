@@ -26,6 +26,7 @@ Str, intel, wisd, dext, cons, charisma are all capped at 20, min at 1
 
 #include <string>
 #include <vector>
+#include "monster.h"
 
 
 using namespace std;
@@ -67,6 +68,11 @@ class Player {
     void setItems(vector<Item> currItemList);
     void setHealthPot(int numPots);
 
+    //to be called when the player is neighboring a monster in a dungeon;
+    //allows player to attack monster first and then monster attack back
+    //if playerFirst = true; vice versa for false
+    void battleMonster(Monster* theMonster, bool playerFirst);
+
 
 
   private:
@@ -76,7 +82,7 @@ class Player {
     string name;
     char gender;
     vector<Item> items;
-    void LevelUp();
+    void levelUp();
 };
 
 

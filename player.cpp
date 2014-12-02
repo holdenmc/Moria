@@ -10,6 +10,7 @@ player.cpp - implementations for player.h
 #include <string>
 #include "player.h"
 #include "item.h"
+#include "monster.h"
 
 using namespace std;
 
@@ -214,7 +215,7 @@ void Player::incrExp(int addedExp) {
 
   //Levels up every 100 points
   if (exp >= level*LEVELEXP) {
-    LevelUp();
+    levelUp();
   }
 
 }
@@ -314,10 +315,13 @@ void Player::refreshStats() {
 
 }
 
-void Player::LevelUp() {
+void Player::levelUp() {
   //THIS NEEDS TO BE DONE
   //Calls some sort of menu where the player hits inputs to choose what stats
   //to upgrade
 }
 
-
+void Player::battleMonster(Monster* theMonster, bool playerFirst) {
+  //TODO
+  cout << "HELP " << endl << endl;
+}
