@@ -17,8 +17,13 @@ town.h - specific instance of a map, contains thed default shops that the player
 
 #define BUY_MENU_START_ROW 1
 #define BUY_MENU_START_COL 33
-#define BUY_MENU_END_ROW 10
-#define BUY_MENU_END_COL 64
+#define BUY_MENU_END_ROW   10
+#define BUY_MENU_END_COL   64
+#define MAX_ITEMS          10
+#define MENU_SPACING       2
+#define PRINTED_STRING_LEN 8
+#define PRICE_DIGITS       4
+#define COL_MAX            6
 
 using namespace std;
 
@@ -54,7 +59,7 @@ class Town: public Map {
     void enterBuyMenu(Store theStore);
     //changes chars in map tiles to show buy menu 'overlay'
     //usually only called once per entering store's buy menu
-    void updateTilesForBuyMenu(Store theStore);
+    void updateTilesForBuyMenu(Store* theStore);
     Player* thePlayer;
 };
 

@@ -13,6 +13,7 @@ store.h - contains information for a store that exists in the town
 
 #define STORE_SIZE 5 //basic store dimension - don't have to use this
 
+
 using namespace std;
 
 class Store {
@@ -28,6 +29,9 @@ class Store {
     int getRowEnt();
     int getColEnt();
     char getDoor();
+    vector<string> getItems();
+    vector<int> getPrices();
+
 
   private:
     int row, col, width, height, rowEnt, colEnt;

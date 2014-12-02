@@ -7,6 +7,7 @@ town.cpp - implementation for town.h
 
 #include <vector>
 #include <iostream>
+#include <string>
 #include "utils.h"
 #include "player.h"
 #include "town.h"
@@ -113,17 +114,38 @@ void Town::enterBuyMenu(Store theStore) {
     }
   }
 
-  updateTilesForBuyMenu(theStore);//make look like buy menu
+  updateTilesForBuyMenu(&theStore);//make look like buy menu
   DrawGame(this, thePlayer); //draw the screen now that values have been updated
 
   bool done = false;
   char input;
+  int inputInt = -1; //Initialize to an unused value
   while (!done) {
     cin >> input;
+
+    //Use the q key to exit the menu
     if (input == 'q') {
       done = true;
     }
 
+    //Handles the potential buying options
+    switch(input) {
+      inputInt = input - '0';
+
+      case '0':
+      case '1': 
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9': transferItemFromStore(inputInt, &theStore, thePlayer);
+                break;
+    }
+
+    updateTilesForBuyMenu(&theStore); //Rebuild the menu with the item gone
     DrawGame(this, thePlayer);
   }
 
@@ -135,9 +157,15 @@ void Town::enterBuyMenu(Store theStore) {
   }
 }
 
-void Town::updateTilesForBuyMenu(Store theStore) {
+void Town::updateTilesForBuyMenu(Store* theStore) {
+  int i, j, itemNum;
+  string currString;
+  char currentChar = '0';
+  vector<string> items = theStore->getItems();
+  vector<int> prices = theStore->getPrices();
+
   //set boundaries - run in square row 1 row 10 col 33 col 64
-  int i = BUY_MENU_START_COL;
+  i = BUY_MENU_START_COL;
   while (i <= BUY_MENU_END_COL) {
     tiles[BUY_MENU_START_ROW][i] = '=';
     tiles[BUY_MENU_END_ROW][i] = '=';
@@ -150,4 +178,54 @@ void Town::updateTilesForBuyMenu(Store theStore) {
     tiles[i][BUY_MENU_END_COL] = '|';
     i++;
   }
+
+  //Iterates the first column of items 
+
+  for (itemNum = 0; itemNum < COL_MAX && itemNum < items.size(); itemNum++) {
+    i = BUY_MENU_START_COL + MENU_SPACING;
+    j = 0;
+
+    currString = items.at(itemNum);
+    //Prints out the name of the item (first 8 chars)
+    for(j = 0; j < currString.length(); j++) {
+      currentChar = currString.at(j);
+      tiles[BUY_MENU_START_ROW + itemNum + MENU_SPACING][i+j] = currentChar;
+    }
+    
+    i += PRINTED_STRING_LEN;
+    currString = to_string(prices.at(itemNum));
+    for(j = 0; j < currString.length() && j < PRICE_DIGITS; j++) {
+      currentChar = currString.at(j);
+      tiles[BUY_MENU_START_ROW + itemNum + MENU_SPACING][i+j] = currentChar;
+    }
+
+  }
+  int firstColumnSpace = MENU_SPACING + PRINTED_STRING_LEN + PRICE_DIGITS;
+  if (items.size() > COL_MAX)
+  for (itemNum = COL_MAX; itemNum < items.size(); itemNum++) {
+    i = BUY_MENU_START_COL + MENU_SPACING + firstColumnSpace;
+    j = 0;
+
+    currString = items.at(itemNum);
+    //Prints out the name of the item (first 8 chars)
+    for(j = 0; j < currString.length() && j < 2*COL_MAX; j++) {
+      currentChar = currString.at(j);
+      tiles[BUY_MENU_START_ROW + itemNum - COL_MAX + MENU_SPACING][i+j] 
+        = currentChar;
+    }
+    
+    i += PRINTED_STRING_LEN;
+    currString = to_string(prices.at(itemNum));
+    for(j = 0; j < currString.length() && j < PRICE_DIGITS; j++) {
+      currentChar = currString.at(j);
+      tiles[BUY_MENU_START_ROW + itemNum - COL_MAX + MENU_SPACING][i+j] 
+        = currentChar;
+    }
+
+  }
+
+
+
+
+
 }

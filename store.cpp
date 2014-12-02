@@ -47,3 +47,11 @@ int Store::getColEnt() {
 char Store::getDoor() {
   return door;
 }
+
+vector<string> Store::getItems() {
+  return items;
+}
+
+vector<int> Store::getPrices() {
+  return prices;
+}

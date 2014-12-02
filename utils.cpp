@@ -29,3 +29,7 @@ void DrawGame(Town* theMap, Player* thePlayer) {
 
   theMap->drawMap();
 }
+
+void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
+  
+}
