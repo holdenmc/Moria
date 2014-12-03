@@ -28,7 +28,7 @@ Town::Town (vector<Store*> *stores, Player* thePlayer) {
 
 bool Town::performTownAction(char input) {
   switch(input) {
-    case 'q': return true;
+    case 'Q': return true;
 
     case 'i': handleInventory();
 
@@ -280,7 +280,7 @@ void Town::drawInventory() {
   string currString;
   char currentChar = '0';
   vector<Item> items = thePlayer->getItems();
-  string instruct = "Enter # to (un)equip";
+  string instruct = "Enter # to (un)equip, or q";
 
   //Clear out the entire space until it's populated later
   for(i = BUY_MENU_START_ROW; i <= BUY_MENU_END_ROW; i++) {
@@ -384,20 +384,25 @@ void Town::handleInventory() {
   int inputInt = -1; //Initialize to an unused value
   vector<Item> currItemList = thePlayer->getItems();
   while (!done) {
-    cin >> input;
-
-    //Use the q key to exit the menu
-    if (input == 'q') {
-      done = true;
+    bool choiceLoopDone = false;
+    while (!choiceLoopDone) {
+      cin >> input;
+      inputInt = (int)input - ASCII_ZERO;
+      //Use the q key to exit the menu
+      if (input == 'q') {
+        choiceLoopDone = done = true;
+      } else if (currItemList.size() != 0 && 
+          (inputInt >= 0 && inputInt < (int)currItemList.size())) {
+        //THEN check for inventory empty, or no item in given
+        choiceLoopDone = true;
+      }
     }
-    inputInt = (int)input - 48;
-    //Handles the potential equipping options
     
     Item currItem;
     Item chosenItem;
     switch(inputInt) {
       case 0:
-      case 1: 
+      case 1:
       case 2:
       case 3:
       case 4:
@@ -425,7 +430,6 @@ void Town::handleInventory() {
     drawInventory(); //Draw again now that equip is changed
     thePlayer->refreshStats();
     DrawGame(this, thePlayer);
-
   }
 
   //done with inventory menu, return town map to previous state

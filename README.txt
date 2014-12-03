@@ -3,24 +3,22 @@ todo:
   finish this readme
   make inventory viewable in dungeon?
   remove magic numbers
-  print out message if user presses 'q' in town (right now it exits with no message)
   change how exp works to be based on current level and monster level/dungeon level?
-  make levelup menu take in a char to avoid feaking out on being given non-int
-  program gives error when in inventory and selects out of range number - make it just reprompt
+  unequipping something that adds to health/cons does not lower health (does lower max health though?)
 
 
 CONTROLS
 
 in town: 
-  q to quit a menu
-  q to quit the program if not in menu
+  q to quit a store menu
+  q to quit inventory
   i to view inventory
 
 in dungeon:
-  Q to quit the game (you lose immediately, can only return to town by going up
-    stairs)
 
-anywhere:
+
+anywhere (not in a menu):
+  Q to quit game (you lose)
   h to drink a health potion (if you have any)
   wasd to move character (when not in menu)
   numbers/letters if prompted (when leveling up, making character, etc.)

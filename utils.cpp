@@ -19,10 +19,9 @@ using namespace std;
 Player* MakePlayer() {
   //Function to create a player with random attributes
   Player* result;
-  char input;
-  string name;
-  char gender;
-  int str, intel, dext, cons, charisma, age, height, weight;
+  char input, gender;
+  string name, age;
+  int str, intel, dext, cons, charisma, height, weight;
   bool done = false;
 
   //NEED TO WRITE THIS AS A MENU SO THEY CAN RE-ROLL STATS
@@ -31,15 +30,15 @@ Player* MakePlayer() {
   cout << "Gender (type m or f): "; 
   cin >> gender;
   while (gender != 'm' && gender != 'f') {
-    cout << "Try again.  m for male, f for female." << endl;
+    cout << "Try again. m for male, f for female." << endl;
     cin >> gender;
   }
 
   cout << "Age: ";
   cin >> age;
-  while (age < 0 || age > 99) {
-    cout << "Try again.  Valid ages are between 1 and 99." << endl;
-    cin >> gender;
+  while (atoi(age.c_str()) < 1 || atoi(age.c_str()) > 99) {
+    cout << "Try again. Valid ages are between 1 and 99: ";
+    cin >> age;
   }
 
   while (!done) {
@@ -52,7 +51,6 @@ Player* MakePlayer() {
       charisma = rand() % 5 + 3;
       height = rand() % 20 + 68;
       weight = rand() % 100 + 180;
-
     } else {
       str = rand() % 5 + 3;
       intel = rand() % 5 + 3;
@@ -63,18 +61,17 @@ Player* MakePlayer() {
       weight = rand() % 50 + 140;
     }
 
-    cout <<endl << setw(11) << left << name << "STR:" << setw(7) << str <<"CON:" 
-    << setw(7) << cons << "INT:" << setw(7) << intel << "DEX:" << setw(7) 
-    << dext << "CHA:" << setw(7) << charisma << endl << setw(18) << right
-    << "Height:" << left << setw(4) << height << "Weight:" << setw(7) << weight 
-    << endl;
+    cout <<endl << setw(11) << left << name.substr(0, MAX_PLAYER_NAME) << "STR:"
+    << setw(7) << str <<"CON:" << setw(7) << cons << "INT:" << setw(7) << intel
+    << "DEX:" << setw(7) << dext << "CHA:" << setw(7) << charisma << endl
+    << setw(18) << right << "Height:" << left << setw(4) << height << "Weight:" 
+    << setw(7) << weight << endl;
 
-    cout << endl << "Hit r to reroll.  Hit d to finish" << endl;
+    cout << endl << "Hit r to reroll. Hit d to finish" << endl;
 
     cin >> input;
-
     while (input != 'd' && input != 'r') {
-      cout << "Try again.  r to re-roll, d to finish creation" << endl;
+      cout << "Try again. r to re-roll, d to finish creation" << endl;
       cin >> input;
     }
 
@@ -87,8 +84,8 @@ Player* MakePlayer() {
 
   }
 
-  result = new Player(str, intel, dext, cons, charisma, age, height, 
-                      weight, name, gender);
+  result = new Player(str, intel, dext, cons, charisma, atoi(age.c_str()), 
+                  height, weight, name.substr(0, MAX_PLAYER_NAME), gender);
   return result;
 }
 

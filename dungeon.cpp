@@ -50,7 +50,6 @@ bool Dungeon::performDungeonAction(char input) {
     thePlayer->drinkHealthPot();
     return false;
   } else if (input == 'Q') {
-    cout << "You lose. Goodbye." << endl;
     exit(1);
   }
 

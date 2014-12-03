@@ -9,6 +9,8 @@ utils.h - delcarations for general utility functions to assist in basic game
 #define UTILS_H
 
 
+#define MAX_PLAYER_NAME 11
+
 #include <vector>
 #include <string>
 #include "player.h"

@@ -249,7 +249,6 @@ void Player::addItem(Item newItem) {
   items.push_back(newItem);
 }
 
-
 void Player::removeItem(string removeName) {
   unsigned int i;
   vector<Item> newItemList;
@@ -259,7 +258,6 @@ void Player::removeItem(string removeName) {
     }
   }
   items = newItemList;
-
 }
 
 void Player::drinkHealthPot() {
@@ -335,28 +333,25 @@ void Player::levelUp() {
   level++;
 
   cout << "Level up: choose what stat you would like to increase by 1:" << endl
-    << "1 - strength" << endl << "2 - constitution" << endl
-    << "3 - intelligence" << endl << "4 - dexterity" << endl
-    << "5 - charisma" << endl;
+    << "a - strength" << endl << "b - constitution" << endl
+    << "c - intelligence" << endl << "d - dexterity" << endl
+    << "e - charisma" << endl;
 
-  int choice;
-  bool done = false;
-  while (!done) {
+  char choice;
+  cin >> choice;
+  while (choice != 'a' && choice != 'b' && choice != 'c' && choice != 'd'
+      && choice != 'e') {
+    cout << "Invalid choice - try again: ";
     cin >> choice;
-    if (choice > 0 && choice <= 5) {
-      done = true;
-    } else {
-      cout << "Invalid choice - try again: ";
-    }
   }
 
-  if (choice == 1) {
+  if (choice == 'a') {
     base_str++;
-  } else if (choice == 2) {
+  } else if (choice == 'b') {
     base_cons++;
-  } else if (choice == 3) {
+  } else if (choice == 'c') {
     base_intel++;
-  } else if (choice == 4) {
+  } else if (choice == 'd') {
     base_dext++;
   } else {
     base_char++;

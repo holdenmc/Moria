@@ -30,7 +30,7 @@ dungeon.h - specific instance of a map, user can fight monsters etc. and earn
 #define THREE_MONSTERS 5
 #define FOUR_MONSTERS 4
 #define FIVE_MONSTERS 7
-#define SIX_MONSTERS 5
+#define SIX_MONSTERS 6
 #define NUM_WEAK_MONS 4
 #define WEAK_MONS_MIN 0
 #define NUM_MED_MONS 5

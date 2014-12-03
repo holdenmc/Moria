@@ -27,6 +27,7 @@ town.h - specific instance of a map, contains thed default shops that the player
 #define COL_MAX            5 //Max items in a column
 #define DUNGEON_ENT_ROW    2 //location of dungeon in any town instance
 #define DUNGEON_ENT_COL    32
+#define ASCII_ZERO         48
 
 
 using namespace std;

@@ -148,4 +148,6 @@ int main() {
 
     done = townMap->performTownAction(input);
   }
+
+  return 0;
 }
