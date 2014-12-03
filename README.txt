@@ -6,6 +6,7 @@ todo:
   change how exp works to be based on current level and monster level/dungeon level?
   unequipping something that adds to health/cons does not lower health (does lower max health though?)
   ->unequipping removes a health pot???????
+  if you buy something from a store it removes itself, but then when you back in the store it is still there
 
 
 CONTROLS
