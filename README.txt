@@ -5,6 +5,7 @@ todo:
   remove magic numbers
   change how exp works to be based on current level and monster level/dungeon level?
   unequipping something that adds to health/cons does not lower health (does lower max health though?)
+  ->unequipping removes a health pot???????
 
 
 CONTROLS
