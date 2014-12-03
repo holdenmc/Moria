@@ -24,7 +24,7 @@ Player* MakePlayer() {
   int str, intel, dext, cons, charisma, height, weight;
   bool done = false;
 
-  //NEED TO WRITE THIS AS A MENU SO THEY CAN RE-ROLL STATS
+  //Requests Name, gender and age first
   cout << "Name : ";
   getline(cin, name);
   cout << "Gender (type m or f): "; 
@@ -43,6 +43,7 @@ Player* MakePlayer() {
 
   while (!done) {
     srand(time(NULL));
+    // Randomly generates stats
     if (gender == 'm') {
       str = rand() % 5 + 4;
       intel = rand() % 5 + 3;
@@ -60,7 +61,7 @@ Player* MakePlayer() {
       height = rand() % 20 + 62;
       weight = rand() % 50 + 140;
     }
-
+    //Displays the stats
     cout <<endl << setw(11) << left << name.substr(0, MAX_PLAYER_NAME) << "STR:"
     << setw(7) << str <<"CON:" << setw(7) << cons << "INT:" << setw(7) << intel
     << "DEX:" << setw(7) << dext << "CHA:" << setw(7) << charisma << endl
@@ -75,6 +76,7 @@ Player* MakePlayer() {
       cin >> input;
     }
 
+    //Handles inputs
     switch(input) {
       case 'd': done = true;
                 break;
@@ -109,6 +111,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   vector<Item> currItemList = theStore->getItems();
   int storeInventorySize = currItemList.size();
 
+  //Checks if itemNum is even valid in the first place
   if (itemNum >= storeInventorySize) { 
     return;
   }
@@ -120,17 +123,19 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   Item currItem = currItemList.at(itemNum);
   int charisma = thePlayer->getChar();
 
+  //First check is if you have enough gold
   if (currGold < price) {
     return;
-  } else if (inventorySize > 9) {
+  } else if (inventorySize > 9) { //Checks if inventory is full
     return;
   } else {
+    //Handles charisma-based price reduction
     int priceReduce = 0;
     if (charisma > 8) {
       priceReduce = 2*(charisma - 5);
     }
     thePlayer->changeGold(-1*(price - priceReduce));
-    
+    //Handles the fact that the general store just sells HPots
     if (theStore->getDoor() == 'g') {
       thePlayer->setHealthPot(1 + thePlayer->getHealthPots());
       return;
@@ -156,6 +161,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
 
 }
 
+// Converts an integer into a string.  like .to_string in c++11
 string toString(int number) {
   ostringstream stream;
   stream << number;

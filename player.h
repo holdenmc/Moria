@@ -38,11 +38,14 @@ using namespace std;
 class Item;
 class Player {
   public:
+    //Default constructor
     Player();
+    //Real constructor
     Player(int i_str, int i_intel, int i_dext, int i_cons, 
         int i_charisma, int i_age, int i_height, int i_weight,
         string i_name, char i_gender);
 
+    //OH MY GOD SO MANY GETTERS WOWOWOWOWOWOWOW
     int getStr();
     int getIntel();
     int getHealth();
@@ -62,15 +65,20 @@ class Player {
     int getHealthPots();
     int getMaxHealth();
 
-
+    //These modify their respective stat by the input value
     void incrExp(int addedExp);
     void changeMana(int manaChange);
     void changeGold(int moneyChange);
+
+    //Methods for manipulating the players items
     void addItem(Item newItem);
     void removeItem(string removeName);
-    void refreshStats();
-    void drinkHealthPot();
     void setItems(vector<Item> currItemList);
+
+    //Changes stats to deal with equipment
+    void refreshStats();
+
+    void drinkHealthPot();
     void setHealthPot(int numPots);
 
     //to be called when the player is neighboring a monster in a dungeon;
@@ -91,6 +99,7 @@ class Player {
     string name;
     char gender;
     vector<Item> items;
+    //Method that handles the menu for when a player levels up.
     void levelUp();
 };
 

@@ -264,7 +264,7 @@ void Player::drinkHealthPot() {
   if (health == max_health) {
     return;
   }
-
+  //Adds 10 health, but never goes over max
   if (healthPots > 0) {
     health += 10;
     if (health > max_health) {
@@ -279,7 +279,7 @@ void Player::setHealthPot(int numPots) {
 }
 
 void Player::refreshStats() {
-
+  //Store the boosts from equipment to each major stat
   int str_boost = 0;
   int int_boost = 0;
   int cons_boost = 0;
@@ -321,6 +321,8 @@ void Player::refreshStats() {
   cons = base_cons + cons_boost;
   charisma = base_char + char_boost;
   dext = base_dext + dext_boost;
+
+  //Recomputes max_health and mana from new stats
   max_health = base_health + cons*2;
   mana = DEF_MANA * intel/8;
 
@@ -332,6 +334,7 @@ void Player::levelUp() {
   health++;
   level++;
 
+  //Offers menu
   cout << "Level up: choose what stat you would like to increase by 1:" << endl
     << "a - strength" << endl << "b - constitution" << endl
     << "c - intelligence" << endl << "d - dexterity" << endl
@@ -362,6 +365,7 @@ void Player::levelUp() {
 
 int Player::battleMonster(Monster* theMonster, bool playerFirst) {
   srand(time(NULL));
+  
   if (playerFirst) {
     theMonster->hitForDamage(getStr());
     if (theMonster->getHealth() <= 0) {

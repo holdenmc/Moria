@@ -46,7 +46,7 @@ int main() {
   string i_name, int i_boost, int i_indicator, int i_type
   */
 
-
+  //All the items you could ever want
   Item hPot = Item("HP Pot", 0, 0, 0);
   generalItems.push_back(hPot);
   generalPrices.push_back(100);

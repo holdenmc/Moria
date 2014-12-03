@@ -34,14 +34,17 @@ class Item {
     Item();
     Item(string i_name, int i_boost, int i_indicator, int i_type);
 
+    //Getters
     string getName();
     int getBoost();
     int getIndicator();
     int getType();
     bool getEquip();
 
+    //Setter for the only variable that changes
     void setEquip(bool i_equipped);
-
+    
+    //Handles equipping (so that that you can never equip two of same type)
     void equip(Player* thePlayer);
 
   private:

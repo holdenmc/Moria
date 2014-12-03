@@ -28,12 +28,13 @@ Town::Town (vector<Store*> *stores, Player* thePlayer) {
 
 bool Town::performTownAction(char input) {
   switch(input) {
+    //Q quits
     case 'Q': return true;
-
+    //i does inventory
     case 'i': handleInventory();
-
+    //h drinks a potion
     case 'h': thePlayer->drinkHealthPot();
-
+    //Movement
     case 'w':
     case 'a':
     case 's':
@@ -43,6 +44,7 @@ bool Town::performTownAction(char input) {
   return false;
 }
 
+//Used to actually draw the stores into the tiles array
 void Town::addStore(Store* aStore) {
   int i, j;
   for (i = aStore->getRow(); i < aStore->getRow() + aStore->getHeight(); i++) {
@@ -54,6 +56,7 @@ void Town::addStore(Store* aStore) {
   tiles[aStore->getRowEnt()][aStore->getColEnt()] = aStore->getDoor();
 }
 
+//Handles movement
 void Town::performActionInDirection(char direction) {
   if (direction == 'w') {
     //check for empty space...
@@ -65,7 +68,7 @@ void Town::performActionInDirection(char direction) {
       Dungeon* firstDungeon = new Dungeon(thePlayer);
       firstDungeon->enterDungeonLoop();
       delete(firstDungeon);
-    } else if (tiles[playerLocRow - 1][playerLocCol] != '#') {
+    } else if (tiles[playerLocRow - 1][playerLocCol] != '#') { //Handle door entry
       Store* possStore = getStoreFromDoor(tiles[playerLocRow-1][playerLocCol]);
       if (possStore != NULL) {
         enterBuyMenu(*possStore);

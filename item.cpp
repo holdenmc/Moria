@@ -82,10 +82,10 @@ void Item::equip(Player* thePlayer) {
   for (unsigned int i = 0; i < list.size(); i++) {
     
     curr = list.at(i);
-    
+    //Checks if there is currently one of that type equipped
     if (curr.getType() == type) {
       if (curr.getEquip()) {
-        if (name.compare(curr.getName()) != 0) {
+        if (name.compare(curr.getName()) != 0) { //Checks that its not the currItem
           curr.setEquip(false);
           equipped = true;
           return;
