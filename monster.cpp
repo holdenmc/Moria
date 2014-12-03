@@ -102,7 +102,7 @@ void Monster::makeBoss(enum monsters theMonster) {
   } else if (theMonster == SmallDragon) {
     health = SMALLDRAGON_HEALTH;
     strength = SMALLDRAGON_STRENGTH;
-    name = 's';
+    name = 'S';
   } else if (theMonster == Dragon) {
     health = DRAGON_HEALTH;
     strength = DRAGON_STRENGTH;

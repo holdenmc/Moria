@@ -49,7 +49,7 @@ int main() {
 
   Item hPot = Item("HP Pot", 0, 0, 0);
   generalItems.push_back(hPot);
-  generalPrices.push_back(400);
+  generalPrices.push_back(100);
   
   Item body1 = Item("Vest", 1, 4, 3);
   Item body2 = Item("Chn Mail", 2, 4, 3);

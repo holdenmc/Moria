@@ -132,7 +132,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     }
   }
   level = 1;
-  expe = 0;
+  expe = 90;
   mana = DEF_MANA * intel/8;
   gold = DEF_GOLD + (charisma - 8)*10;
 
@@ -324,6 +324,7 @@ void Player::refreshStats() {
   charisma = base_char + char_boost;
   dext = base_dext + dext_boost;
   max_health = base_health + cons*2;
+  mana = DEF_MANA * intel/8;
 
 
 }
@@ -331,6 +332,7 @@ void Player::refreshStats() {
 void Player::levelUp() {
   base_health++;
   health++;
+  level++;
 
   cout << "Level up: choose what stat you would like to increase by 1:" << endl
     << "1 - strength" << endl << "2 - constitution" << endl

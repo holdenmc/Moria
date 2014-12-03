@@ -130,7 +130,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   } else {
     int priceReduce = 0;
     if (charisma > 8) {
-      priceReduce = 2*(charisma - 8);
+      priceReduce = 2*(charisma - 5);
     }
     thePlayer->changeGold(-1*(price - priceReduce));
     
