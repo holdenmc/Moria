@@ -73,7 +73,7 @@ class Town: public Map {
     //Called along with drawInventory
     void handleInventory();
 
-
+    //The specific iteration of the player
     Player* thePlayer;
 };
 

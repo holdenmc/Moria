@@ -27,7 +27,7 @@ Player* MakePlayer() {
   int str, intel, dext, cons, charisma, height, weight;
   bool done = false;
 
-  //NEED TO WRITE THIS AS A MENU SO THEY CAN RE-ROLL STATS
+  //Requests Name, gender and age first
   cout << "Name : ";
   getline(cin, name);
   cout << "Gender (type m or f): "; 
@@ -46,6 +46,7 @@ Player* MakePlayer() {
 
   while (!done) {
     srand(time(NULL));
+    // Randomly generates stats
     if (gender == 'm') {
       str = rand() % STAT_5 + STAT_4;
       intel = rand() % STAT_5 + STAT_3;
@@ -81,6 +82,7 @@ Player* MakePlayer() {
       cin >> input;
     }
 
+    //Handles inputs
     switch(input) {
       case 'd': done = true;
                 break;
@@ -218,6 +220,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   vector<Item> currItemList = theStore->getItems();
   int storeInventorySize = currItemList.size();
 
+  //Checks if itemNum is even valid in the first place
   if (itemNum >= storeInventorySize) { 
     return;
   }
@@ -229,17 +232,19 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
   Item currItem = currItemList.at(itemNum);
   int charisma = thePlayer->getChar();
 
+  //First check is if you have enough gold
   if (currGold < price) {
     return;
-  } else if (inventorySize > INVENT_SIZE) {
+  } else if (inventorySize > INVENT_SIZE) {//Checks if inventory is full
     return;
   } else {
+    //Handles charisma-based price reduction
     int priceReduce = 0;
     if (charisma > CHARIS_CHANGE) {
       priceReduce = PRICE_REDUC * (charisma - CHARIS_FACTOR);
     }
     thePlayer->changeGold(-1*(price - priceReduce));
-    
+    //Handles the fact that the general store just sells HPots
     if (theStore->getDoor() == 'g') {
       thePlayer->setHealthPot(thePlayer->getHealthPots() + 1);
       return;
@@ -265,6 +270,7 @@ void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {
 
 }
 
+// Converts an integer into a string.  like .to_string in c++11
 string toString(int number) {
   ostringstream stream;
   stream << number;

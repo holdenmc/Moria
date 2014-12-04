@@ -23,6 +23,7 @@ int main() {
   vector<Store*>* stores = MakeStores();
 
   Town* townMap = new Town(stores, thePlayer);
+  
   bool done = false; //true when we want to exit game loop
   char input;
 
