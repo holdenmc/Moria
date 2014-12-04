@@ -336,11 +336,11 @@ void Dungeon::setupDungeon() {
 
 void Dungeon::spawnMonsters() {
   //add rocks around down stairs so user can only exit once all monsters dead
-  tiles[PLAYER_START_ROW][COLS - 3] = '#';
-  tiles[PLAYER_START_ROW - 1][COLS - 3] = '#';
-  tiles[PLAYER_START_ROW - 1][COLS - 2] = '#';
-  tiles[PLAYER_START_ROW + 1][COLS - 3] = '#';
-  tiles[PLAYER_START_ROW + 1][COLS - 2] = '#';
+  tiles[PLAYER_START_ROW][COL_THREE_FROM_RIGHT] = '#';
+  tiles[PLAYER_START_ROW - 1][COL_THREE_FROM_RIGHT] = '#';
+  tiles[PLAYER_START_ROW - 1][COL_TWO_FROM_RIGHT] = '#';
+  tiles[PLAYER_START_ROW + 1][COL_THREE_FROM_RIGHT] = '#';
+  tiles[PLAYER_START_ROW + 1][COL_TWO_FROM_RIGHT] = '#';
 
   int count = 0;
   if (level == 1) {
@@ -481,14 +481,13 @@ void Dungeon::processBattleResult(int code, Monster* theMonster) {
         exit(2);
       }
       //remove rocks that were spawned around stairs to allow access to next
-      tiles[PLAYER_START_ROW][COLS - 3] = '.';
-      tiles[PLAYER_START_ROW - 1][COLS - 3] = '.';
-      tiles[PLAYER_START_ROW - 1][COLS - 2] = '.';
-      tiles[PLAYER_START_ROW + 1][COLS - 3] = '.';
-      tiles[PLAYER_START_ROW + 1][COLS - 2] = '.';
+      tiles[PLAYER_START_ROW][COL_THREE_FROM_RIGHT] = '.';
+      tiles[PLAYER_START_ROW - 1][COL_THREE_FROM_RIGHT] = '.';
+      tiles[PLAYER_START_ROW - 1][COL_TWO_FROM_RIGHT] = '.';
+      tiles[PLAYER_START_ROW + 1][COL_THREE_FROM_RIGHT] = '.';
+      tiles[PLAYER_START_ROW + 1][COL_TWO_FROM_RIGHT] = '.';
     }
   } else if (code == PLAYER_DIE) {
-    tiles[playerLocRow][playerLocCol] = '@'; //player died here
     cout << "You died. You lose. Goodbye." << endl;
     exit(0);
   }

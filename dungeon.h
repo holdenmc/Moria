@@ -39,6 +39,8 @@ dungeon.h - specific instance of a map, user can fight monsters etc. and earn
 #define HIGH_MONS_MIN 9
 #define BOSS_MIN 13
 #define GOLD_CONST 50
+#define COL_THREE_FROM_RIGHT 63
+#define COL_TWO_FROM_RIGHT 64
 
 
 using namespace std;

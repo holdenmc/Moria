@@ -97,3 +97,6 @@ MONSTERS
 
 
 
+FUTURE IMPROVEMENTS
+  make inventory viewable in dungeon
+  make exp harder to earn if you are fighting low level monsters and you are higher level, and vice versa to reward fighting monsters that are stronger
