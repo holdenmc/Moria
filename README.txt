@@ -1,8 +1,11 @@
 todo:
   cleanup memory
-  add DUNGEON and MONSTERS to README
+    ->delete the stores items made vector etc at end of main()?
+  finish this readme
+    ->add DUNGEON and MONSTERS to README
   remove magic numbers
   if you buy something from a store it removes itself, but then when you back in the store it is still there
+
 
 
 PREMISE
