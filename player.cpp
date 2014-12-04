@@ -326,6 +326,9 @@ void Player::refreshStats() {
   max_health = base_health + cons*2;
   mana = DEF_MANA * intel/8;
 
+  if (health > max_health) {
+    health = max_health;
+  }
 
 }
 
