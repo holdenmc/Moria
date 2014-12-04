@@ -158,8 +158,8 @@ void Town::enterBuyMenu(Store theStore) {
     if (input == 'q') {
       done = true;
     }
-    inputInt = (int)input - 48;
-    //Handles the potential buying options
+    inputInt = (int)input - ASCII_ZERO;
+    //handles the potential buying options
     switch(inputInt) {
       case 0:
       case 1: 
@@ -230,7 +230,7 @@ void Town::updateTilesForBuyMenu(Store* theStore) {
 
     if (currentChar <= '0' + (COL_MAX - MENU_SPACING + 1)) {
       tiles[i][BUY_MENU_START_COL + 2 + MENU_SPACING + PRINTED_STRING_LEN + 
-        PRICE_DIGITS] = currentChar + 5;
+        PRICE_DIGITS] = currentChar + CYCLE_CHAR;
     }
     currentChar++;
     i++;
@@ -323,7 +323,7 @@ void Town::drawInventory() {
 
     if (currentChar <= '0' + (COL_MAX - MENU_SPACING + 1)) {
       tiles[i][BUY_MENU_START_COL + 2 + MENU_SPACING + PRINTED_STRING_LEN + 
-        PRICE_DIGITS] = currentChar + 5;
+        PRICE_DIGITS] = currentChar + CYCLE_CHAR;
     }
     currentChar++;
     i++;

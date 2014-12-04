@@ -59,7 +59,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     gender = FEMALE;
   }
   
-  if(i_str <= 20 && i_str > 0) {
+  if(i_str <= MAX_STAT_INIT && i_str > 0) {
     str = i_str;
   } else {
     cout << "CHOSE AN INVALID STRENGTH";
@@ -67,7 +67,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     str = DEF_STAT;
   }
 
-  if(i_intel <= 20 && i_intel > 0) {
+  if(i_intel <= MAX_STAT_INIT && i_intel > 0) {
     intel = i_intel;
   } else {
     cout << "CHOSE AN INVALID INTELLIGENCE";
@@ -76,7 +76,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
   }
 
   
-  if(i_dext <= 20 && i_dext > 0) {
+  if(i_dext <= MAX_STAT_INIT && i_dext > 0) {
     dext = i_dext;
   } else {
     cout << "CHOSE AN INVALID DEXTERITY";
@@ -84,7 +84,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     dext = DEF_STAT;
   }
 
-  if(i_cons <= 20 && i_cons > 0) {
+  if(i_cons <= MAX_STAT_INIT && i_cons > 0) {
     cons = i_cons;
   } else {
     cout << "CHOSE AN INVALID CONSTITUTION";
@@ -92,11 +92,11 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     cons = DEF_STAT;
   }
 
-  health = 2*cons + DEF_HEALTH; //Health is a calculated field
+  health = CONS_MULT * cons + DEF_HEALTH; //Health is a calculated field
   max_health = health;
   base_health = DEF_HEALTH;
 
-  if(i_charisma <= 20 && i_charisma > 0) {
+  if(i_charisma <= MAX_STAT_INIT && i_charisma > 0) {
     charisma = i_charisma;
   } else {
     cout << "CHOSE AN INVALID Charisma";
@@ -104,7 +104,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     charisma = DEF_STAT;
   }
 
-  if(i_age <= 99 && i_age > 0) {
+  if(i_age <= AGE_MAX && i_age > 0) {
     age = i_age;
   } else {
     cout << "CHOSE AN INVALID AGE";
@@ -112,7 +112,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     age = DEF_AGE;
   }
 
-  if(i_weight <= 300 && i_weight >= 80) {
+  if(i_weight <= WEIG_MAX && i_weight >= WEIGH_MIN) {
     weight = i_weight;
   } else {
     if (gender == MALE) {
@@ -122,7 +122,7 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
     }
   }
 
-  if(i_height <= 96 && i_height >= 36) {
+  if(i_height <= HEIG_MAX && i_height >= HEIG_MIN) {
     height = i_height;
   } else {
     if (gender == MALE) {
@@ -133,11 +133,11 @@ Player::Player(int i_str, int i_intel, int i_dext, int i_cons,
   }
   level = 1;
   expe = 0;
-  mana = DEF_MANA * intel/8;
-  gold = DEF_GOLD + (charisma - 8)*10;
+  mana = DEF_MANA * intel/MANA_FACTOR;
+  gold = DEF_GOLD + (charisma - GOLD_CHAR_DIF)*GOLD_MULT;
 
   healthPots = 1;
-  if (charisma > 15) {
+  if (charisma > CHAR_POTBONUS) {
     healthPots++;
   }
 
@@ -266,7 +266,7 @@ void Player::drinkHealthPot() {
   }
   //Adds 10 health, but never goes over max
   if (healthPots > 0) {
-    health += 10;
+    health += HPOT_RESTORE;
     if (health > max_health) {
       health = max_health;
     }
@@ -323,8 +323,8 @@ void Player::refreshStats() {
   dext = base_dext + dext_boost;
 
   //Recomputes max_health and mana from new stats
-  max_health = base_health + cons*2;
-  mana = DEF_MANA * intel/8;
+  max_health = base_health + cons*CONS_MULT;
+  mana = DEF_MANA * intel/MANA_FACTOR;
 
   if (health > max_health) {
     health = max_health;
@@ -368,7 +368,6 @@ void Player::levelUp() {
 
 int Player::battleMonster(Monster* theMonster, bool playerFirst) {
   srand(time(NULL));
-  
   if (playerFirst) {
     theMonster->hitForDamage(getStr());
     if (theMonster->getHealth() <= 0) {
