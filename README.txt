@@ -1,11 +1,4 @@
-todo:
-  cleanup memory
-    ->delete the stores items made vector etc at end of main()?
-  finish this readme
-    ->add DUNGEON and MONSTERS to README
-  if you buy something from a store it removes itself, but then when you back in the store it is still there
-
-
+MORIA by Holden McGinnis and Conor Ryan
 
 PREMISE
 Moria is a text-based ASCII RPG game, modeled after a game of the same name produced
