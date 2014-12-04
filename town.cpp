@@ -32,8 +32,10 @@ bool Town::performTownAction(char input) {
     case 'Q': return true;
     //i does inventory
     case 'i': handleInventory();
+              break;
     //h drinks a potion
     case 'h': thePlayer->drinkHealthPot();
+              break;
     //Movement
     case 'w':
     case 'a':

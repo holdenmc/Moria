@@ -2,6 +2,7 @@ todo:
   cleanup memory
     ->delete the stores items made vector etc at end of main()?
   finish this readme
+    ->add DUNGEON and MONSTERS to README
   remove magic numbers
   unequipping something that adds to health/cons does not lower health (does lower max health though?)
   ->unequipping removes a health pot???????
