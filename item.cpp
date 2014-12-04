@@ -31,8 +31,8 @@ using namespace std;
 //Default Constructor
 Item::Item() {
   boost = 0;
-  indicator = 1;
-  type = 1;
+  indicator = DEF_INDIC;
+  type = DEF_TYPE;
   name = "Fists";
   equipped = false;
 }

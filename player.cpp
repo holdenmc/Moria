@@ -333,25 +333,25 @@ void Player::levelUp() {
   level++;
 
   cout << "Level up: choose what stat you would like to increase by 1:" << endl
-    << "a - strength" << endl << "b - constitution" << endl
-    << "c - intelligence" << endl << "d - dexterity" << endl
-    << "e - charisma" << endl;
+    << "A - strength" << endl << "B - constitution" << endl
+    << "C - intelligence" << endl << "D - dexterity" << endl
+    << "E - charisma" << endl;
 
   char choice;
   cin >> choice;
-  while (choice != 'a' && choice != 'b' && choice != 'c' && choice != 'd'
-      && choice != 'e') {
+  while (choice != 'A' && choice != 'B' && choice != 'C' && choice != 'D'
+      && choice != 'E') {
     cout << "Invalid choice - try again: ";
     cin >> choice;
   }
 
-  if (choice == 'a') {
+  if (choice == 'A') {
     base_str++;
-  } else if (choice == 'b') {
+  } else if (choice == 'B') {
     base_cons++;
-  } else if (choice == 'c') {
+  } else if (choice == 'C') {
     base_intel++;
-  } else if (choice == 'd') {
+  } else if (choice == 'D') {
     base_dext++;
   } else {
     base_char++;

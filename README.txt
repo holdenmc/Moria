@@ -1,9 +1,7 @@
 todo:
   cleanup memory
   finish this readme
-  make inventory viewable in dungeon?
   remove magic numbers
-  change how exp works to be based on current level and monster level/dungeon level?
   unequipping something that adds to health/cons does not lower health (does lower max health though?)
   ->unequipping removes a health pot???????
   if you buy something from a store it removes itself, but then when you back in the store it is still there
@@ -30,3 +28,6 @@ anywhere (not in a menu):
 
 
 
+FUTURE IMPROVEMENTS
+  make inventory viewable in dungeon
+  make exp harder to earn if you are fighting low level monsters and you are higher level, and vice versa to reward fighting monsters that are stronger
