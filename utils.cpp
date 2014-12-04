@@ -204,16 +204,16 @@ vector<Store*>* MakeStores() {
   Store* magic = new Store(STORE_SIZE+7, STORE_SIZE*5, STORE_SIZE, STORE_SIZE,
     STORE_SIZE - 1, STORE_SIZE - 1, 'm', items, prices);*/
 
-  vector<Store*> stores;
-  stores.push_back(general);
-  stores.push_back(armory);
-  stores.push_back(smith);
+  vector<Store*>* stores = new vector<Store*>;
+  stores->push_back(general);
+  stores->push_back(armory);
+  stores->push_back(smith);
 
   /*stores.push_back(temple);
   stores.push_back(alchemy);
   stores.push_back(magic);*/
 
-  return &stores;
+  return stores;
 }
 
 void transferItemFromStore(int itemNum, Store* theStore, Player* thePlayer) {

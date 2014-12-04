@@ -1,10 +1,12 @@
 todo:
   cleanup memory
+    ->delete the stores items made vector etc at end of main()?
   finish this readme
   remove magic numbers
   unequipping something that adds to health/cons does not lower health (does lower max health though?)
   ->unequipping removes a health pot???????
   if you buy something from a store it removes itself, but then when you back in the store it is still there
+
 
 
 PREMISE
