@@ -226,7 +226,7 @@ void Player::incrExp(int addedExp) {
   expe += addedExp;
 
   //Levels up every 100 points
-  if (expe >= LEVELEXP) {
+  if (expe >= (LEVELEXP * (level+1)/2)) {
     expe = 0; //reset exp
     levelUp();
   }
